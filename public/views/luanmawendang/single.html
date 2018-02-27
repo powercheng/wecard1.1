@@ -1,0 +1,45 @@
+<div class="text">
+	<ul>
+		<div ng-repeat="info in personInfos">
+			<li>
+				<span class="title">{{info.name}}</span>
+				<div ng-switch="info.name">
+					<div ng-switch-when="联系电话">
+						<a href="tel: {{phone}}"><span class="content">{{info.value}}&nbsp</span><img src="/images/phone.png" width="15px" height="15px" /></a>
+					</div>
+					<div ng-switch-when="QQ号码">
+						<a onclick="show('codeBg1')"><span class="content">{{info.value}}&nbsp</span><img src="/images/QQ.png" width="15px" height="15px" /></a>
+					</div>
+					<div ng-switch-when="微信号码">
+						<a onclick="show('codeBg2')"><span class="content">{{info.value}}&nbsp</span><img src="/images/wechat.png" width="15px" height="15px" /></a>
+					</div>
+					<div ng-switch-when="联系地址">
+						<a href="http://map.baidu.com/mobile/?third_party=uri_api#place/list/qt=s&wd={{info.value}}&point={{otherFiles[0].value}}&searchFlag=uri_api&c=340/l=&vt=map&i=0">
+						<span class="content">{{info.value}}</span>&nbsp<img src="/images/map.png" width="15px" height="15px" /></a>
+					</div>
+					<div ng-switch-when="网址">
+						<a href="{{info.value}}">
+						<span class="content">{{info.value}}</span>&nbsp<img src="/images/map.png" width="15px" height="15px" />
+						</a>
+					</div>
+					<div ng-switch-default>
+						<span class="content">{{info.value}}</span>
+					</div>
+				</div>
+			</li>
+			</div>
+
+			<div ng-repeat="info in companyInfos">
+				<li>
+					<span class="title">{{info.name}}</span>
+					<span class="content">{{info.value}}</span>
+				</li>
+			</div>
+			<div ng-repeat="info in otherInfos">
+				<li>
+					<span class="title">{{info.name}}</span>
+					<span class="content">{{info.value}}</span>
+				</li>
+			</div>
+	</ul>
+</div>
