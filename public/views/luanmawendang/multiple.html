@@ -20,8 +20,8 @@
 					<li>
 						<span class="title">{{info.name}}</span>
 						<div ng-switch="info.name">
-							<div ng-switch-when="联系电话">
-								<a href="tel: {{phone}}"><span class="content">{{info.value}}&nbsp</span><img src="/images/phone.png" width="15px" height="15px" /></a>
+							<div ng-switch-when="座机电话">
+								<a href="tel: {{info.value}}"><span class="content">{{info.value}}&nbsp</span><img src="/images/phone.png" width="15px" height="15px" /></a>
 							</div>
 							<div ng-switch-when="QQ号码">
 								<a onclick="show('codeBg1')"><span class="content">{{info.value}}&nbsp</span><img src="/images/QQ.png" width="15px" height="15px" /></a>

@@ -41,7 +41,7 @@
 		</div>
 		<div class="codeText">长按二维码识别关注微信</div>
 		<div style="text-align: center;">
-			<img ng-if="otherFiles[1].value == ''" ng-src="/images/Wcode.jpg" id="codeImage" style="width: 160px; height: 160px;">
+			<img ng-src="/images/Wcode.jpg" style="width: 160px; height: 160px;">
 			<img ng-if="otherFiles[1].value != ''" ng-src="/uploads/{{phone}}/{{otherFiles[1].value}}" id="codeImage" style="width: 160px; height: 160px;">
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 		</div>
 		<div class="codeText">长按二维码识别关注QQ</div>
 		<div style="text-align: center;">
-			<img ng-if="otherFiles[2].value == ''" ng-src="/images/QQcode.jpg" id="codeImage" style="width: 160px; height: 160px;">
+			<img ng-if="otherFiles[2].value == ''" ng-src="/images/QQcode.jpg" style="width: 160px; height: 160px;">
 			<img ng-if="otherFiles[2].value != ''" ng-src="/uploads/{{phone}}/{{otherFiles[2].value}}" id="codeImage" style="width: 160px; height: 160px;">
 		</div>
 	</div>
