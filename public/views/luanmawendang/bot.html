@@ -1,24 +1,24 @@
 <div class="music" id="musicImage" onclick="music()">
-	<audio id="musicId" ng-src="{{trustUrl(music)}}" autoplay="autoplay">
+	<audio id="musicId" ng-src="{{trustUrl(card.music)}}" autoplay="autoplay">
 	</audio>
 </div>
 
-<div class="menu" style="background-color: {{menuColor}};">
+<div class="menu" style="background-color: {{card.menuColor}};">
 	<ul>
 		<li>
-			<a href="tel:{{phone}}">
+			<a href="tel:{{card.personPhone.name}}">
 				<div><img src="/images/menu1.png" alt="" width="22" height="22" /></div>
 				<span>一键拨号</span>
 			</a>
 		</li>
 		<li>
-			<a href="javascript:void(0);" onclick="show('codeBg1')">
+			<a href="javascript:void(0);" onclick="show('codeBg2')">
 				<img src="/images/menu2.png" alt="" width="22" height="22" />
 				<span>存到手机</span>
 			</a>
 		</li>
 		<li>
-			<a href="http://map.baidu.com/mobile/?third_party=uri_api#place/list/qt=s&wd={{company_address}}&point={{otherFiles[0].value}}&searchFlag=uri_api&c=340/l=&vt=map&i=0">
+			<a href="http://apis.map.qq.com/tools/poimarker?type=0&marker=coord:{{card.companyAddress.value}};title:{{card.companyName.name}};addr:{{card.companyAddress.name}}&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp">
 				<img src="/images/menu3.png" alt="" width="22" height="22" />
 				<span>一键导航</span>
 			</a>
@@ -41,8 +41,7 @@
 		</div>
 		<div class="codeText">长按二维码识别关注微信</div>
 		<div style="text-align: center;">
-			<img ng-src="/images/Wcode.jpg" style="width: 160px; height: 160px;">
-			<img ng-if="otherFiles[1].value != ''" ng-src="/uploads/{{phone}}/{{otherFiles[1].value}}" id="codeImage" style="width: 160px; height: 160px;">
+			<img ng-if="card.wechat.code != ''" ng-src="http://image.mymicrocard.com/{{card.wechat.code}}" style="width: 160px; height: 160px;">
 		</div>
 	</div>
 </div>
@@ -53,8 +52,30 @@
 		</div>
 		<div class="codeText">长按二维码识别关注QQ</div>
 		<div style="text-align: center;">
-			<img ng-if="otherFiles[2].value == ''" ng-src="/images/QQcode.jpg" style="width: 160px; height: 160px;">
-			<img ng-if="otherFiles[2].value != ''" ng-src="/uploads/{{phone}}/{{otherFiles[2].value}}" id="codeImage" style="width: 160px; height: 160px;">
+			<img ng-if="card.QQ.code != ''" ng-src="http://image.mymicrocard.com/{{card.QQ.code}}" style="width: 160px; height: 160px;">
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function show(str) {
+		document.getElementById("layBg").style.display="block";
+		document.getElementById(str).style.display="block";
+	}
+
+	function closeIt(str) {
+		document.getElementById("layBg").style.display="none";
+		document.getElementById(str).style.display="none";
+	}
+
+	function music(){    
+		var audio = document.getElementById("musicId");
+		if (audio.paused) {
+			audio.play();
+			document.getElementById("musicImage").style.backgroundImage = "url(/images/music-btn-open.png)"; 
+		} else {
+			audio.pause();
+			document.getElementById("musicImage").style.backgroundImage = "url(/images/music-btn-close.png)"; 
+		}
+	}
+</script>

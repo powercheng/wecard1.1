@@ -1,0 +1,91 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport", initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2,user-scalable=no"><meta name="format-detection" content="telephone=no"><title>黄 敏的微名片</title><link href="/stylesheets/main.css" rel="stylesheet"></head><body><div>
+			<div class="main" style="background-color: #ff7694;">
+				<div ng-bind-html="card.topHtml | to_trusted" class="ng-binding"><p><img src="http://image.mymicrocard.com/7/5/WIN_20170204_13_03_40_Pro.jpg" style="width:100%;"></p></div>
+				<!-- ngInclude: '/views/luanmawendang/' + template + '.html' --><div ng-include="'/views/luanmawendang/' + template + '.html'" class="ng-scope"><div class="ng-scope">
+	<!-- ngIf: card.companyName --><p ng-if="card.companyName" style="text-align: center; color: #ffffff; font-size: 26px" class="ng-binding ng-scope">云梦敏捷图文</p><!-- end ngIf: card.companyName -->
+	<!-- ngIf: card.personImage -->
+	<!-- ngIf: card.personName --><p ng-if="card.personName" style="text-align: center; color: #ffffff; font-size: 22px" class="ng-binding ng-scope">黄 敏</p><!-- end ngIf: card.personName -->
+	<!-- ngIf: card.personTitle --><p ng-if="card.personTitle" style="text-align: center; color: #ffffff; font-size: 16px" class="ng-binding ng-scope">总经理</p><!-- end ngIf: card.personTitle -->
+	<!-- ngIf: card.personPhone --><p ng-if="card.personPhone" style="text-align: center; color: #ffffff; font-size: " class="ng-scope">
+		<a href="tel: 18163184708"><span class="ng-binding">18163184708&nbsp;</span><img src="/images/phone.png" width="15px" height="15px">
+		</a>
+	</p><!-- end ngIf: card.personPhone -->
+
+	<div style="background-color: white; margin: 0px;">
+		<ul style="	list-style-type: none; margin: 0; padding: 0; border: none;">
+			<!-- ngIf: card.companyPhone --><li ng-if="card.companyPhone" style="padding: 8px; border-bottom: 1px solid #dedede" class="ng-scope">
+				<span style="width: 80px; position: absolute; color: #aaa;">座机电话</span>
+				<a href="tel: 0712-4328583">
+					<span style="padding-left: 80px;" class="ng-binding">0712-4328583&nbsp;</span>
+					<img src="/images/phone.png" width="15px" height="15px">
+				</a>
+			</li><!-- end ngIf: card.companyPhone -->
+			<!-- ngIf: card.companyAddressName -->
+			<!-- ngIf: card.wecardNumber -->
+			<!-- ngIf: card.QQNumber -->
+		</ul>
+	</div>
+</div></div>
+				<div ng-bind-html="card.botHtml | to_trusted" class="ng-binding"></div>
+				<!-- ngInclude: '/views/luanmawendang/bot.html' --><div ng-include="'/views/luanmawendang/bot.html'" class="ng-scope"><div class="music ng-scope" id="musicImage" onclick="music()">
+	<audio id="musicId" ng-src="http://image.mymicrocard.com/undefined" autoplay="autoplay" src="http://image.mymicrocard.com/undefined">
+	</audio>
+</div>
+
+<div class="menu ng-scope" style="background-color: #ff7694;">
+	<ul>
+		<li>
+			<a href="tel:18163184708">
+				<div><img src="/images/menu1.png" alt="" width="22" height="22"></div>
+				<span>一键拨号</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0);" onclick="show('codeBg1')">
+				<img src="/images/menu2.png" alt="" width="22" height="22">
+				<span>存到手机</span>
+			</a>
+		</li>
+		<li>
+			<a href="http://apis.map.qq.com/tools/poimarker?type=0&amp;marker=coord:;title:云梦敏捷图文;addr:&amp;key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&amp;referer=myapp">
+				<img src="/images/menu3.png" alt="" width="22" height="22">
+				<span>一键导航</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0)">
+				<img src="/images/menu4.png" alt="" width="22" height="22">
+				<span>推荐记录</span>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="layBg ng-scope" id="layBg" style="display: none;">
+	<!--透明背景-->
+</div>
+<div class="codeBg ng-scope" id="codeBg2" style="display: none;">
+	<div class="codeImg">
+		<div class="close" onclick="closeIt('codeBg2')">
+			<img ng-src="/images/close.png" alt="" style="width: 30px; height: 30px;" src="/images/close.png">
+		</div>
+		<div class="codeText">长按二维码识别关注微信</div>
+		<div style="text-align: center;">
+			<img ng-src="/images/Wcode.jpg" style="width: 160px; height: 160px;" src="/images/Wcode.jpg">
+			<!-- ngIf: otherFiles[1].value != '' --><img ng-if="otherFiles[1].value != ''" ng-src="/uploads//" id="codeImage" style="width: 160px; height: 160px;" class="ng-scope" src="/uploads//"><!-- end ngIf: otherFiles[1].value != '' -->
+		</div>
+	</div>
+</div>
+<div class="codeBg ng-scope" id="codeBg1" style="display: none;">
+	<div class="codeImg">
+		<div class="close" onclick="closeIt('codeBg1')">
+			<img ng-src="/images/close.png" alt="" style="width: 30px; height: 30px;" src="/images/close.png">
+		</div>
+		<div class="codeText">长按二维码识别关注QQ</div>
+		<div style="text-align: center;">
+			<!-- ngIf: otherFiles[2].value == '' -->
+			<!-- ngIf: otherFiles[2].value != '' --><img ng-if="otherFiles[2].value != ''" ng-src="/uploads//" id="codeImage" style="width: 160px; height: 160px;" class="ng-scope" src="/uploads//"><!-- end ngIf: otherFiles[2].value != '' -->
+		</div>
+	</div>
+</div></div>
+			</div>
+		</div><script src="/javascripts/main.js"></script></body></html>

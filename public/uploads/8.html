@@ -1,0 +1,180 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport", initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2,user-scalable=no"><meta name="format-detection" content="telephone=no"><title>姓名的微名片</title><link href="/stylesheets/main.css" rel="stylesheet"></head><body><div>
+		<div class="main" style="background-color: #ff7694;">
+			<div ng-bind-html="text[0] | to_trusted" class="ng-binding"></div>
+			<!-- ngInclude: '/views/luanmawendang/' + 'multiple.html' --><div ng-include="'/views/luanmawendang/' + 'multiple.html'" class="ng-scope"><div class="template ng-scope">
+	<!-- ngIf: pImage != '上传文件' -->
+	<h3 style="text-align: center; color: white" class="ng-binding">姓名</h3>
+	<h4 style="text-align: center; color: white" class="ng-binding"></h4>
+	<div class="mutexTab">
+		<!-- ngIf: companyInfos.length != 0 || otherInfos.length != 0 --><div class="mutex mused ng-scope" ng-if="companyInfos.length != 0 || otherInfos.length != 0" onclick="changeMut(0)">
+			<a href="javascript:void(0);">个人信息</a>
+		</div><!-- end ngIf: companyInfos.length != 0 || otherInfos.length != 0 -->
+		<!-- ngIf: companyInfos.length != 0 --><div class="mutex ng-scope" ng-if="companyInfos.length != 0" onclick="changeMut(1)">
+			<a href="javascript:void(0);">公司信息</a>
+		</div><!-- end ngIf: companyInfos.length != 0 -->
+		<!-- ngIf: otherInfos.length != 0 -->
+	</div>
+	<div class="text">
+		<div class="mutexItem" style="display: block;">
+			<ul>
+				<!-- ngRepeat: info in personInfos --><div ng-repeat="info in personInfos" class="ng-scope">
+					<li>
+						<span class="title ng-binding">联系电话</span>
+						<div ng-switch="info.name">
+							<!-- ngSwitchWhen: 座机电话 -->
+							<!-- ngSwitchWhen: QQ号码 -->
+							<!-- ngSwitchWhen: 微信号码 -->
+							<!-- ngSwitchWhen: 联系地址 -->
+							<!-- ngSwitchDefault:  --><div ng-switch-default="" class="ng-scope">
+								<span class="content ng-binding"></span>
+							</div><!-- end ngSwitchWhen: -->
+						</div>
+					</li>
+				</div><!-- end ngRepeat: info in personInfos --><div ng-repeat="info in personInfos" class="ng-scope">
+					<li>
+						<span class="title ng-binding">联系地址</span>
+						<div ng-switch="info.name">
+							<!-- ngSwitchWhen: 座机电话 -->
+							<!-- ngSwitchWhen: QQ号码 -->
+							<!-- ngSwitchWhen: 微信号码 -->
+							<!-- ngSwitchWhen: 联系地址 --><div ng-switch-when="联系地址" class="ng-scope">
+								<a href="http://map.baidu.com/mobile/?third_party=uri_api#place/list/qt=s&amp;wd=&amp;point=&amp;searchFlag=uri_api&amp;c=340/l=&amp;vt=map&amp;i=0">
+									<span class="content ng-binding"></span>&nbsp;<img src="/images/map.png" width="15px" height="15px">
+								</a>
+							</div><!-- end ngSwitchWhen: -->
+							<!-- ngSwitchDefault:  -->
+						</div>
+					</li>
+				</div><!-- end ngRepeat: info in personInfos --><div ng-repeat="info in personInfos" class="ng-scope">
+					<li>
+						<span class="title ng-binding">微信号码</span>
+						<div ng-switch="info.name">
+							<!-- ngSwitchWhen: 座机电话 -->
+							<!-- ngSwitchWhen: QQ号码 -->
+							<!-- ngSwitchWhen: 微信号码 --><div ng-switch-when="微信号码" class="ng-scope">
+								<a onclick="show('codeBg2')"><span class="content ng-binding">&nbsp;</span><img src="/images/wechat.png" width="15px" height="15px"></a>
+							</div><!-- end ngSwitchWhen: -->
+							<!-- ngSwitchWhen: 联系地址 -->
+							<!-- ngSwitchDefault:  -->
+						</div>
+					</li>
+				</div><!-- end ngRepeat: info in personInfos --><div ng-repeat="info in personInfos" class="ng-scope">
+					<li>
+						<span class="title ng-binding">QQ号码</span>
+						<div ng-switch="info.name">
+							<!-- ngSwitchWhen: 座机电话 -->
+							<!-- ngSwitchWhen: QQ号码 --><div ng-switch-when="QQ号码" class="ng-scope">
+								<a onclick="show('codeBg1')"><span class="content ng-binding">&nbsp;</span><img src="/images/QQ.png" width="15px" height="15px"></a>
+							</div><!-- end ngSwitchWhen: -->
+							<!-- ngSwitchWhen: 微信号码 -->
+							<!-- ngSwitchWhen: 联系地址 -->
+							<!-- ngSwitchDefault:  -->
+						</div>
+					</li>
+				</div><!-- end ngRepeat: info in personInfos --><div ng-repeat="info in personInfos" class="ng-scope">
+					<li>
+						<span class="title ng-binding">邮箱</span>
+						<div ng-switch="info.name">
+							<!-- ngSwitchWhen: 座机电话 -->
+							<!-- ngSwitchWhen: QQ号码 -->
+							<!-- ngSwitchWhen: 微信号码 -->
+							<!-- ngSwitchWhen: 联系地址 -->
+							<!-- ngSwitchDefault:  --><div ng-switch-default="" class="ng-scope">
+								<span class="content ng-binding"></span>
+							</div><!-- end ngSwitchWhen: -->
+						</div>
+					</li>
+				</div><!-- end ngRepeat: info in personInfos -->
+			</ul>
+		</div>
+		<div class="mutexItem" style="display: none;">
+			<ul>
+				<!-- ngRepeat: info in companyInfos --><div ng-repeat="info in companyInfos" class="ng-scope">
+					<li>
+						<span class="title ng-binding">固定电话</span>
+						<span class="content ng-binding"></span>
+					</li>
+				</div><!-- end ngRepeat: info in companyInfos --><div ng-repeat="info in companyInfos" class="ng-scope">
+					<li>
+						<span class="title ng-binding">传真号码</span>
+						<span class="content ng-binding"></span>
+					</li>
+				</div><!-- end ngRepeat: info in companyInfos --><div ng-repeat="info in companyInfos" class="ng-scope">
+					<li>
+						<span class="title ng-binding">网址</span>
+						<span class="content ng-binding"></span>
+					</li>
+				</div><!-- end ngRepeat: info in companyInfos -->
+			</ul>
+		</div>
+		<div class="mutexItem" style="display: none;">
+
+			<ul>
+				<!-- ngRepeat: info in otherInfos -->
+			</ul>
+		</div>
+	</div>
+</div></div>
+			<div ng-bind-html="text[1] | to_trusted" class="ng-binding"></div>
+			<!-- ngInclude: '/views/luanmawendang/bot.html' --><div ng-include="'/views/luanmawendang/bot.html'" class="ng-scope"><div class="music ng-scope" id="musicImage" onclick="music()">
+	<audio id="musicId" ng-src="http://image.mymicrocard.com/上传文件" autoplay="autoplay" src="http://image.mymicrocard.com/上传文件">
+	</audio>
+</div>
+
+<div class="menu ng-scope" style="background-color: #ff7694;">
+	<ul>
+		<li>
+			<a href="tel:">
+				<div><img src="/images/menu1.png" alt="" width="22" height="22"></div>
+				<span>一键拨号</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0);" onclick="show('codeBg1')">
+				<img src="/images/menu2.png" alt="" width="22" height="22">
+				<span>存到手机</span>
+			</a>
+		</li>
+		<li>
+			<a href="http://map.baidu.com/mobile/?third_party=uri_api#place/list/qt=s&amp;wd=&amp;point=&amp;searchFlag=uri_api&amp;c=340/l=&amp;vt=map&amp;i=0">
+				<img src="/images/menu3.png" alt="" width="22" height="22">
+				<span>一键导航</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0)">
+				<img src="/images/menu4.png" alt="" width="22" height="22">
+				<span>推荐记录</span>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="layBg ng-scope" id="layBg" style="display: none;">
+	<!--透明背景-->
+</div>
+<div class="codeBg ng-scope" id="codeBg2" style="display: none;">
+	<div class="codeImg">
+		<div class="close" onclick="closeIt('codeBg2')">
+			<img ng-src="/images/close.png" alt="" style="width: 30px; height: 30px;" src="/images/close.png">
+		</div>
+		<div class="codeText">长按二维码识别关注微信</div>
+		<div style="text-align: center;">
+			<img ng-src="/images/Wcode.jpg" style="width: 160px; height: 160px;" src="/images/Wcode.jpg">
+			<!-- ngIf: otherFiles[1].value != '' --><img ng-if="otherFiles[1].value != ''" id="codeImage" style="width: 160px; height: 160px;" class="ng-scope"><!-- end ngIf: otherFiles[1].value != '' -->
+		</div>
+	</div>
+</div>
+<div class="codeBg ng-scope" id="codeBg1" style="display: none;">
+	<div class="codeImg">
+		<div class="close" onclick="closeIt('codeBg1')">
+			<img ng-src="/images/close.png" alt="" style="width: 30px; height: 30px;" src="/images/close.png">
+		</div>
+		<div class="codeText">长按二维码识别关注QQ</div>
+		<div style="text-align: center;">
+			<!-- ngIf: otherFiles[2].value == '' -->
+			<!-- ngIf: otherFiles[2].value != '' --><img ng-if="otherFiles[2].value != ''" id="codeImage" style="width: 160px; height: 160px;" class="ng-scope"><!-- end ngIf: otherFiles[2].value != '' -->
+		</div>
+	</div>
+</div></div>
+		</div>
+	</div><script src="/javascripts/main.js"></script></body></html>

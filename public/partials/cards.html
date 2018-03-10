@@ -1,0 +1,10 @@
+
+<div class="container">
+	<div ng-repeat="cardPath in user.cards">
+		<spane>{{cardPath}}</span>
+		<a href="/#/cards/{{cardPath}}"><button>编辑</button></a>
+	</div>
+
+	<input type="text" ng-model="cardName"></input>
+	<button ng-click="createCard()">创建</button>
+</div> 

@@ -1,29 +1,33 @@
 {
-  "name": "cardlogin",
-  "version": "0.0.0",
+  "name": "weCard",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node server.js"
   },
   "dependencies": {
+    "angular-qrcode": "*",
+    "bcryptjs": "*",
     "body-parser": "~1.17.1",
+    "connect-flash": "*",
     "cookie-parser": "~1.4.3",
-    "express-session": "*",
     "debug": "~2.6.3",
+    "dotenv": "^5.0.1",
+    "ejs": "*",
     "express": "~4.15.2",
+    "express-jwt": "0.2.1",
+    "express-session": "*",
+    "express-validator": "*",
+    "jsonwebtoken": "0.4.0",
     "mongodb": "*",
     "mongoose": "*",
+    "mongoose-sequence": "*",
     "morgan": "~1.8.1",
     "multer": "*",
     "ng-file-upload": "^12.2.13",
-    "serve-favicon": "~2.4.2",
-    "express-validator": "*",
     "passport": "*",
     "passport-local": "*",
-    "bcryptjs": "*",
-    "ejs": "*",
-    "qiniu": "~6.1.1",
-    "connect-flash": "*",
-    "angular-qrcode": "*"
+    "qiniu": "~7.1.0",
+    "serve-favicon": "~2.4.2"
   }
 }

@@ -44,11 +44,18 @@ router.delete('/:id', function(req, res, next) {
 
 router.put('/', function(req, res, next) {
 	var data = req.body;
-	Card.updateCard(data, function(err) {
+	Card.findOne({cardPath: data.cardPath}, function(err, card) {
 		if(err) {
 			next(err);
 		} else {
-			res.send("保存成功");
+			card = data;		
+			card.save(function(err){
+				if(err) {
+					next(err);
+				} else {
+					res.send("保存成功")；
+				}
+			});
 		}
 	});
 });

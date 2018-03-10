@@ -1,0 +1,139 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport", initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=2,user-scalable=no"><meta name="format-detection" content="telephone=no"><title>黄敏的微名片</title><link href="/stylesheets/main.css" rel="stylesheet"></head><body><div>
+     <div class="main" style="background-color: #ff7694;">
+      <div ng-bind-html="card.topHtml | to_trusted" class="ng-binding"><p><img src="http://image.mymicrocard.com/7/16/WIN_20170128_16_41_44_Pro.jpg" style="width:100%;"></p></div>
+      <!-- ngInclude: '/views/luanmawendang/' + template + '.html' --><div ng-include="'/views/luanmawendang/' + template + '.html'" class="ng-scope"><div class="ng-scope">
+	<!-- ngIf: card.companyName.name != '' --><p ng-if="card.companyName.name != ''" style="text-align: center;" class="ng-scope"><span style="color: ; font-size: 32px; border-radius: ; background-color: ; padding: " class="ng-binding">敏捷图文</span></p><!-- end ngIf: card.companyName.name != '' -->
+
+	<!-- ngIf: card.personImage.name != '' --><p ng-if="card.personImage.name != ''" style="text-align: center" class="ng-scope"><img ng-src="http://image.mymicrocard.com/0/personImage.jpg" style="width: 80px; height: 80px; border-radius: 50%" src="http://image.mymicrocard.com/0/personImage.jpg"></p><!-- end ngIf: card.personImage.name != '' -->
+
+	<!-- ngIf: card.personName.name != '' --><p ng-if="card.personName.name != ''" style="text-align: center;" class="ng-scope"><span style="color: ; font-size: ; border-radius: ; background-color: ; padding: " class="ng-binding">黄敏</span></p><!-- end ngIf: card.personName.name != '' -->
+
+	<!-- ngIf: card.personTitle.name != '' --><p ng-if="card.personTitle.name != ''" style="text-align: center;" class="ng-scope"><span style="color: ; font-size: ; border-radius: ; background-color: ; padding: " class="ng-binding">总经理</span></p><!-- end ngIf: card.personTitle.name != '' -->
+	
+	<!-- ngIf: card.personPhone.name != '' --><p ng-if="card.personPhone.name != ''" style="text-align: center;" class="ng-scope"><span style="font-size: ">
+		<a href="tel: 15272838562" style="color: #333;
+	text-decoration: none;"><span class="ng-binding">15272838562&nbsp;</span><img src="/images/phone.png" width="15px" height="15px">
+		</a>
+	</span></p><!-- end ngIf: card.personPhone.name != '' -->
+
+	<div style="background-color: white; margin: 0px;">
+		<ul style="	list-style-type: none; margin: 0; padding: 0; border: none;">
+			<!-- ngIf: card.companyPhone.name != '' --><li ng-if="card.companyPhone.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede" class="ng-scope">
+				<span style="width: 80px; position: absolute; color: #aaa;">座机电话</span>
+				<a href="tel: 0712-4222110" style="color: #333;
+	text-decoration: none;">
+					<span style="padding-left: 80px;" class="ng-binding">0712-4222110&nbsp;</span>
+					<img src="/images/phone.png" width="15px" height="15px">
+				</a>
+			</li><!-- end ngIf: card.companyPhone.name != '' -->
+			<!-- ngIf: card.companyAddress.name != '' --><li ng-if="card.companyAddress.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede" class="ng-scope">
+				<span style="width: 80px; position: absolute; color: #aaa;">联系地址</span>
+				<a href="http://apis.map.qq.com/tools/poimarker?type=0&amp;marker=coord:31.031310,113.745570;title:敏捷图文;addr:云梦县鑫光公寓西北100米(梦泽大道西)&amp;key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&amp;referer=myapp" style="color: #333;
+	text-decoration: none;">
+					<span style="padding-left: 80px;" class="ng-binding">云梦县鑫光公寓西北100米(梦泽大道西)&nbsp;</span>
+					<img src="/images/map.png" width="15px" height="15px">
+				</a>
+			</li><!-- end ngIf: card.companyAddress.name != '' -->
+			<!-- ngIf: card.wechat.name != '' --><li ng-if="card.wechat.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede" class="ng-scope">
+				<span style="width: 80px; position: absolute; color: #aaa;">微信号码</span>
+				<a onclick="show('codeBg2')" style="color: #333;
+	text-decoration: none;">
+					<span style="padding-left: 80px;" class="ng-binding">15272838562&nbsp;</span>
+					<img src="/images/QQ.png" width="15px" height="15px">
+				</a>
+			</li><!-- end ngIf: card.wechat.name != '' -->
+			<!-- ngIf: card.QQ.name != '' --><li ng-if="card.QQ.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede" class="ng-scope">
+				<span style="width: 80px; position: absolute; color: #aaa;">QQ号码</span>
+				<a onclick="show('codeBg1')" style="color: #333;
+	text-decoration: none;">
+					<span style="padding-left: 80px;" class="ng-binding">3367876415&nbsp;</span>
+					<img src="/images/QQ.png" width="15px" height="15px">
+				</a>
+			</li><!-- end ngIf: card.QQ.name != '' -->
+		</ul>
+	</div>
+</div></div>
+      <div ng-bind-html="card.botHtml | to_trusted" class="ng-binding"></div>
+      <!-- ngInclude: '/views/luanmawendang/bot.html' --><div ng-include="'/views/luanmawendang/bot.html'" class="ng-scope"><div class="music ng-scope" id="musicImage" onclick="music()">
+	<audio id="musicId" ng-src="http://image.mymicrocard.com/undefined" autoplay="autoplay" src="http://image.mymicrocard.com/undefined">
+	</audio>
+</div>
+
+<div class="menu ng-scope" style="background-color: #ff7694;">
+	<ul>
+		<li>
+			<a href="tel:15272838562">
+				<div><img src="/images/menu1.png" alt="" width="22" height="22"></div>
+				<span>一键拨号</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0);" onclick="show('codeBg2')">
+				<img src="/images/menu2.png" alt="" width="22" height="22">
+				<span>存到手机</span>
+			</a>
+		</li>
+		<li>
+			<a href="http://apis.map.qq.com/tools/poimarker?type=0&amp;marker=coord:31.031310,113.745570;title:敏捷图文;addr:云梦县鑫光公寓西北100米(梦泽大道西)&amp;key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&amp;referer=myapp">
+				<img src="/images/menu3.png" alt="" width="22" height="22">
+				<span>一键导航</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0)">
+				<img src="/images/menu4.png" alt="" width="22" height="22">
+				<span>推荐记录</span>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="layBg ng-scope" id="layBg" style="display: none;">
+	<!--透明背景-->
+</div>
+<div class="codeBg ng-scope" id="codeBg2" style="display: none;">
+	<div class="codeImg">
+		<div class="close" onclick="closeIt('codeBg2')">
+			<img ng-src="/images/close.png" alt="" style="width: 30px; height: 30px;" src="/images/close.png">
+		</div>
+		<div class="codeText">长按二维码识别关注微信</div>
+		<div style="text-align: center;">
+			<!-- ngIf: card.wechat.code != '' --><img ng-if="card.wechat.code != ''" ng-src="http://image.mymicrocard.com/0/wechat.jpg" style="width: 160px; height: 160px;" class="ng-scope" src="http://image.mymicrocard.com/0/wechat.jpg"><!-- end ngIf: card.wechat.code != '' -->
+		</div>
+	</div>
+</div>
+<div class="codeBg ng-scope" id="codeBg1" style="display: none;">
+	<div class="codeImg">
+		<div class="close" onclick="closeIt('codeBg1')">
+			<img ng-src="/images/close.png" alt="" style="width: 30px; height: 30px;" src="/images/close.png">
+		</div>
+		<div class="codeText">长按二维码识别关注QQ</div>
+		<div style="text-align: center;">
+			<!-- ngIf: card.QQ.code != '' --><img ng-if="card.QQ.code != ''" ng-src="http://image.mymicrocard.com/0/QQ.jpg" style="width: 160px; height: 160px;" class="ng-scope" src="http://image.mymicrocard.com/0/QQ.jpg"><!-- end ngIf: card.QQ.code != '' -->
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" class="ng-scope">
+	function show(str) {
+		document.getElementById("layBg").style.display="block";
+		document.getElementById(str).style.display="block";
+	}
+
+	function closeIt(str) {
+		document.getElementById("layBg").style.display="none";
+		document.getElementById(str).style.display="none";
+	}
+
+	function music(){    
+		var audio = document.getElementById("musicId");
+		if (audio.paused) {
+			audio.play();
+			document.getElementById("musicImage").style.backgroundImage = "url(/images/music-btn-open.png)"; 
+		} else {
+			audio.pause();
+			document.getElementById("musicImage").style.backgroundImage = "url(/images/music-btn-close.png)"; 
+		}
+	}
+</script></div>
+    </div>
+  </div><script src="/javascripts/main.js"></script></body></html>

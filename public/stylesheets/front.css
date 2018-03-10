@@ -1,11 +1,8 @@
+.smallFont {
+	font-size: 12px;
+}
 
-fieldset {
-	margin-bottom: 20px;
-}
-legend {
-	font-size: 18px;
-	margin: 0;
-}
+
 input {
 	margin: 2px;
 	font-size: :;px;
@@ -13,36 +10,6 @@ input {
 
 input[type=file] {
 	display: inline;
-}
-.mutexTab {
-	display: flex;
-	margin: 0px;
-}
-
-.mutexTab .mut {
-	padding: 5px 0px;
-	flex: 1;
-	text-align: center;
-	font-size: 14px;
-}
-
-.mutexTab .mused {
-	background-color: #F8F8F8;
-}
-
-.mutexTab .mused a {
-	font-weight: 700;
-}
-
-
-
-
-
-.add {
-	border-radius: 1em;
-	padding: 3px;
-	width: 25%;
-	margin: 2px;
 }
 
 #qrcode {
@@ -52,7 +19,6 @@ input[type=file] {
 }  
 
 .main {
-	width: 414px
 	margin: 0px auto;
 	padding: 6px 6px 60px 6px;
 	border: none;
@@ -84,69 +50,9 @@ input[type=file] {
 	right: 8px;
 }
 
-.template h1, h2, h3{
+h1, h2, h3{
 	margin: 10px 0;
 }
-
-.template a {
-	color: #333;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.template a:hover, a:link, a:visited{
-	text-decoration: none;
-}
-
-.template ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	border: none;
-}
-
-.template .text {
-	background-color: white;
-	margin: 0px;
-}
-
-.template .mutexTab {
-	display: flex;
-	margin: 0px;
-}
-
-.template .mutexTab .mutex {
-	padding: 10px 0px;
-	flex: 1;
-	text-align: center;
-	font-size: 14px;
-}
-
-
-.template .mutexTab .mused {
-	background-color: #F8F8F8;
-}
-
-.template .mutexTab .mused a {
-	font-weight: 700;
-}
-
-.template .text ul li {
-	padding: 8px;
-	border-bottom: 1px solid #dedede;
-}
-
-.template .title {
-	width: 80px;
-	position: absolute;
-	color: #aaa;
-}
-
-.template .content {
-	padding-left: 80px;
-	word-wrap: break-word;
-}
-
 
 
 /*所有的image，video都包裹在p里面，所以不需要*/
@@ -200,4 +106,36 @@ img, video{
 	left: 0;
 	z-index: 10;
 }
+
+
+.close {
+	position: absolute;
+    top: 6px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.codeBg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 15;
+ }
+ 
+.codeImg {
+	width: 100%;
+	background-color: #fff;
+	padding: 20px 0;
+	position: fixed;
+	left: 0;
+	bottom: 0px;
+}
+.codeText {
+	text-align: center;
+	font-size: 12px;
+	color: #aaa;
+	line-height: 30px;
+}
+
 /*menu 菜单css*/

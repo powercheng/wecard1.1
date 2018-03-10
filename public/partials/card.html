@@ -1,0 +1,362 @@
+<div class="container-fluid">
+	<div class="row">
+		<!--   control panel -->
+		<div class="col-md-2">
+			<div style="margin:10px" ng-click="show(0)"><button class="btn btn-primary btn-block">上编辑框</button></div>
+			<div style="margin:10px" ng-click="show(1)"><button class="btn btn-primary btn-block">模板框</button></div>
+			<div style="margin:10px" ng-click="show(2)"><button class="btn btn-primary btn-block">下编辑框</button></div>
+			<div><button style="margin-bottom: 12px;" class="btn btn-primary btn-block" ng-click="saveCard()">保存</button>{{saveStatus}}
+			</div>
+			<div><button style="margin-bottom: 12px;" class="btn btn-primary btn-block" ng-click="finishCard()">生成卡片</button>
+			</div>
+			<div ng-if="finish">
+				<qrcode data="{{cardHtml}}" href="{{cardHtml}}" size="200"></qrcode>
+			</div>
+			<div id="qrcode"></div>
+		</div>
+
+
+		<div class="col-md-6" ng-hide="myVar[0]" >		
+			<span>上编辑框</span><button ng-click="delText(0)" style="float: right">清空内容</button>
+			<div ng-model="card.topHtml" contenteditable="true" class="editor-text"></div>
+		</div>
+
+
+		<div class="col-md-6  smallFont" ng-hide="myVar[1]">
+			<div><label>模板:&nbsp&nbsp</label><input type="radio" ng-model="template" ng-value="1">1</input></div>
+			<div><label style="width: 9%">公司名:</label><input type="text" ng-model="card.companyName.name" style="width: 15%">
+        <span>字颜色</span><input type="color" ng-model="card.companyName.color">
+        <span>大小</span><input type="text" ng-model="card.companyName.size" style="width: 7%">
+        <span>背景颜色</span><input type="color" ng-model="card.companyName.bgColor">
+        <span>内边距</span><input type="text" ng-model="card.companyName.padding" style="width: 7%">
+        <span>圆形边框</span><input type="text" ng-model="card.companyName.border" style="width: 7%">
+      </div> 
+      <div id="container0">
+        <label style="width: 9%">头像:</label><input type="text" ng-model="card.personImage.name" style="width: 15%">
+        <button id="pickfiles0">上传{{card.personImage.value}}</button>
+      </div>
+      <div><label style="width: 9%">姓名:</label><input type="text" ng-model="card.personName.name" style="width: 15%">
+        <span>字颜色</span><input type="color" ng-model="card.personName.color">
+        <span>大小</span><input type="text" ng-model="card.personName.size" style="width: 7%">
+        <span>背景颜色</span><input type="color" ng-model="card.personName.bgColor">
+        <span>内边距</span><input type="text" ng-model="card.personName.padding" style="width: 7%">
+        <span>圆形边框</span><input type="text" ng-model="card.personName.border" style="width: 7%">        
+      </div>
+
+      <div><label style="width: 9%">职位:</label><input type="text" ng-model="card.personTitle.name" style="width: 15%">
+        <span>字颜色</span><input type="color" ng-model="card.personTitle.color">
+        <span>大小</span><input type="text" ng-model="card.personTitle.size" style="width: 7%">
+        <span>背景颜色</span><input type="color" ng-model="card.personTitle.bgColor">
+        <span>内边距</span><input type="text" ng-model="card.personTitle.padding" style="width: 7%">
+        <span>圆形边框</span><input type="text" ng-model="card.personTitle.border" style="width: 7%"> 
+      </div>
+      <div><label style="width: 9%">移动电话:</label><input type="text" ng-model="card.personPhone.name" style="width: 15%">
+        <span>大小</span><input type="text" ng-model="card.personPhone.size" style="width: 7%">
+      </div>
+
+
+      <div>
+        <label>座机：</label><input type="text" ng-model="card.companyPhone.name" style="width: 15%">
+      </div>
+      
+      <div>
+        <label>公司地址：</label><input type="text" ng-model="card.companyAddress.name">
+        <label>地址坐标：</label><input type="text" ng-model="card.companyAddress.value">
+      </div>
+
+      <div id="container1">
+        <label>微信号码：</label><input type="text" ng-model="card.wechat.name">
+        <label>微信二维码：</label><button id="pickfiles1">上传{{card.wechat.code}}</button>
+      </div>
+      <div id="container2">
+        <label>QQ号码：</label><input type="text" ng-model="card.QQ.name">
+        <label>QQ二维码：</label><button id="pickfiles2">上传{{card.QQ.code}}</button>
+      </div>
+      <div id="container3"><label>背景音乐：</label><button id="pickfiles3">上传{{card.music}}</button></div>
+      <div><label>背景颜色：</label><input type="color" ng-model="card.bgColor"></div>
+      <div><label>菜单颜色：</label><input type="color" ng-model="card.menuColor"></div>
+    </div>
+
+
+
+    <div class="col-md-6" ng-hide="myVar[2]">
+     <span>下编辑框</span><button ng-click="delText(1)" style="float: right">清空内容</button>	
+     <div ng-model="card.botHtml" contenteditable="true" class="editor-text"></div>
+   </div>
+
+
+   <div class="col-md-4" id="main">
+     <div class="main" style="background-color: {{card.bgColor}};">
+      <div ng-bind-html="card.topHtml | to_trusted"></div>
+      <div ng-include="'/views/luanmawendang/' + template + '.html'"></div>
+      <div ng-bind-html="card.botHtml | to_trusted"></div>
+      <div ng-include="'/views/luanmawendang/bot.html'"></div>
+    </div>
+  </div>
+
+
+</div>
+</div>
+
+<script type="text/javascript">
+	var Q0 = new QiniuJsSDK();
+	var uploader = Q0.uploader({
+                            runtimes: 'html5,flash,html4',    //上传模式,依次退化
+                            browse_button: 'pickfiles0',       //上传选择的点选按钮，**必需**
+                            uptoken_url: '/uptoken',            //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
+                            // uptoken : '', //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+                            //unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
+                            //save_key: true,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
+                            domain: 'http://image.mymicrocard.com/',   //bucket 域名，下载资源时用到，**必需**
+                            get_new_uptoken: false,  //设置上传文件的时候是否每次都重新获取新的token
+                            container: 'container0', 
+                            max_file_size: '10mb',           //最大文件体积限制
+                            flash_swf_url: 'js/plupload/Moxie.swf',  //引入flash,相对路径
+                            max_retries: 3,                   //上传失败最大重试次数
+                            dragdrop: true,                   //开启可拖曳上传
+                            drop_element: 'container0',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+                            chunk_size: '4mb',                //分块上传时，每片的体积
+                            auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                            init: {
+                            	'FilesAdded': function(up, files) {
+                            		plupload.each(files, function(file) {
+                                        // 文件添加进队列后,处理相关的事情
+                                      });
+                            	},
+                            	'BeforeUpload': function(up, file) {
+                                       // 每个文件上传前,处理相关的事情
+                                     },
+                                     'UploadProgress': function(up, file) {
+                                       // 每个文件上传时,处理相关的事情
+                                     },
+                                     'FileUploaded': function(up, file, info) {
+                                       // 每个文件上传成功后,处理相关的事情
+                                       // 其中 info.response 是文件上传成功后，服务端返回的json，形式如
+                                       // {
+                                       //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+                                       //    "key": "gogopher.jpg"
+                                       //  }
+                                       // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
+
+                                       // var domain = up.getOption('domain');
+                                       var res = $.parseJSON(info);
+                                       // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
+                                       var scope = angular.element('#pickfiles0').scope();
+                                       scope.card.personImage.name = res.key;
+                                       scope.$apply(); 
+
+                                     },
+                                     'Error': function(up, err, errTip) {
+                                      console.log(err);
+                                       //上传出错时,处理相关的事情
+                                     },
+                                     'UploadComplete': function() {
+                                       //队列文件处理完毕后,处理相关的事情
+                                     },
+                                     'Key': function(up, file) {
+                                    // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+                                    // 该配置必须要在 unique_names: false , save_key: false 时才生效
+                                    var scope = angular.element('#pickfiles0').scope();
+                                    var key = scope.card.cardPath + '/' + file.name;
+                                    // do something with key here
+                                    return key
+                                  }
+                                }
+                              });
+
+var Q1 = new QiniuJsSDK();
+var uploader = Q1.uploader({
+                            runtimes: 'html5,flash,html4',    //上传模式,依次退化
+                            browse_button: 'pickfiles1',       //上传选择的点选按钮，**必需**
+                            uptoken_url: '/uptoken',            //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
+                            // uptoken : '', //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+                            unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
+                            save_key: true,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
+                            domain: 'http://image.mymicrocard.com/',   //bucket 域名，下载资源时用到，**必需**
+                            get_new_uptoken: false,  //设置上传文件的时候是否每次都重新获取新的token
+                            container: 'container1', 
+                            max_file_size: '10mb',           //最大文件体积限制
+                            flash_swf_url: 'js/plupload/Moxie.swf',  //引入flash,相对路径
+                            max_retries: 3,                   //上传失败最大重试次数
+                            dragdrop: true,                   //开启可拖曳上传
+                            drop_element: 'container1',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+                            chunk_size: '4mb',                //分块上传时，每片的体积
+                            auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                            init: {
+                            	'FilesAdded': function(up, files) {
+                            		plupload.each(files, function(file) {
+                                        // 文件添加进队列后,处理相关的事情
+                                      });
+                            	},
+                            	'BeforeUpload': function(up, file) {
+                                       // 每个文件上传前,处理相关的事情
+                                     },
+                                     'UploadProgress': function(up, file) {
+                                       // 每个文件上传时,处理相关的事情
+                                     },
+                                     'FileUploaded': function(up, file, info) {
+                                       // 每个文件上传成功后,处理相关的事情
+                                       // 其中 info.response 是文件上传成功后，服务端返回的json，形式如
+                                       // {
+                                       //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+                                       //    "key": "gogopher.jpg"
+                                       //  }
+                                       // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
+
+                                       // var domain = up.getOption('domain');
+                                       var res = $.parseJSON(info);
+                                       // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
+                                       var scope = angular.element('#pickfiles1').scope();
+                                       scope.card.wechat.code = res.key;
+                                       scope.$apply(); 
+
+                                     },
+                                     'Error': function(up, err, errTip) {
+                                      console.log(err);
+                                       //上传出错时,处理相关的事情
+                                     },
+                                     'UploadComplete': function() {
+                                       //队列文件处理完毕后,处理相关的事情
+                                     },
+                                     'Key': function(up, file) {
+                                    // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+                                    // 该配置必须要在 unique_names: false , save_key: false 时才生效
+
+                                    var scope = angular.element('#pickfiles0').scope();
+                                    var key = scope.card.cardPath + '/' + file.name;
+                                    // do something with key here
+                                    return key
+                                  }
+                                }
+                              });
+var Q2 = new QiniuJsSDK();
+var uploader = Q2.uploader({
+                            runtimes: 'html5,flash,html4',    //上传模式,依次退化
+                            browse_button: 'pickfiles2',       //上传选择的点选按钮，**必需**
+                            uptoken_url: '/uptoken',            //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
+                            // uptoken : '', //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+                            unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
+                            save_key: true,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
+                            domain: 'http://image.mymicrocard.com/',   //bucket 域名，下载资源时用到，**必需**
+                            get_new_uptoken: false,  //设置上传文件的时候是否每次都重新获取新的token
+                            container: 'container2', 
+                            max_file_size: '10mb',           //最大文件体积限制
+                            flash_swf_url: 'js/plupload/Moxie.swf',  //引入flash,相对路径
+                            max_retries: 3,                   //上传失败最大重试次数
+                            dragdrop: true,                   //开启可拖曳上传
+                            drop_element: 'container',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+                            chunk_size: '4mb',                //分块上传时，每片的体积
+                            auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                            init: {
+                            	'FilesAdded': function(up, files) {
+                            		plupload.each(files, function(file) {
+                                        // 文件添加进队列后,处理相关的事情
+                                      });
+                            	},
+                            	'BeforeUpload': function(up, file) {
+                                       // 每个文件上传前,处理相关的事情
+                                     },
+                                     'UploadProgress': function(up, file) {
+                                       // 每个文件上传时,处理相关的事情
+                                     },
+                                     'FileUploaded': function(up, file, info) {
+                                       // 每个文件上传成功后,处理相关的事情
+                                       // 其中 info.response 是文件上传成功后，服务端返回的json，形式如
+                                       // {
+                                       //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+                                       //    "key": "gogopher.jpg"
+                                       //  }
+                                       // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
+
+                                       // var domain = up.getOption('domain');
+                                       var res = $.parseJSON(info);
+                                       // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
+                                       var scope = angular.element('#pickfiles2').scope();
+                                       scope.card.QQ.code = res.key;
+                                       scope.$apply(); 
+
+                                     },
+                                     'Error': function(up, err, errTip) {
+                                      console.log(err);
+                                       //上传出错时,处理相关的事情
+                                     },
+                                     'UploadComplete': function() {
+                                       //队列文件处理完毕后,处理相关的事情
+                                     },
+                                     'Key': function(up, file) {
+                                    // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+                                    // 该配置必须要在 unique_names: false , save_key: false 时才生效
+
+                                    var scope = angular.element('#pickfiles0').scope();
+                                    var key = scope.card.cardPath + '/' + file.name;
+                                    // do something with key here
+                                    return key
+                                  }
+                                }
+                              });
+var Q3 = new QiniuJsSDK();
+var uploader = Q3.uploader({
+                            runtimes: 'html5,flash,html4',    //上传模式,依次退化
+                            browse_button: 'pickfiles3',       //上传选择的点选按钮，**必需**
+                            uptoken_url: '/uptoken',            //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
+                            // uptoken : '', //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+                            unique_names: false, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
+                            save_key: false,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
+                            domain: 'http://image.mymicrocard.com/',   //bucket 域名，下载资源时用到，**必需**
+                            get_new_uptoken: false,  //设置上传文件的时候是否每次都重新获取新的token
+                            container: 'container3', 
+                            max_file_size: '10mb',           //最大文件体积限制
+                            flash_swf_url: 'js/plupload/Moxie.swf',  //引入flash,相对路径
+                            max_retries: 3,                   //上传失败最大重试次数
+                            dragdrop: true,                   //开启可拖曳上传
+                            drop_element: 'container3',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+                            chunk_size: '4mb',                //分块上传时，每片的体积
+                            auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                            init: {
+                            	'FilesAdded': function(up, files) {
+                            		plupload.each(files, function(file) {
+                                        // 文件添加进队列后,处理相关的事情
+                                      });
+                            	},
+                            	'BeforeUpload': function(up, file) {
+                                       // 每个文件上传前,处理相关的事情
+                                     },
+                                     'UploadProgress': function(up, file) {
+                                       // 每个文件上传时,处理相关的事情
+                                     },
+                                     'FileUploaded': function(up, file, info) {
+                                       // 每个文件上传成功后,处理相关的事情
+                                       // 其中 info.response 是文件上传成功后，服务端返回的json，形式如
+                                       // {
+                                       //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+                                       //    "key": "gogopher.jpg"
+                                       //  }
+                                       // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
+
+                                       // var domain = up.getOption('domain');
+                                       var res = $.parseJSON(info);
+                                       // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
+                                       var scope = angular.element('#pickfiles3').scope();
+                                       scope.card.music = res.key;
+                                       scope.$apply(); 
+
+                                     },
+                                     'Error': function(up, err, errTip) {
+                                      console.log(err);
+                                       //上传出错时,处理相关的事情
+                                     },
+                                     'UploadComplete': function() {
+                                       //队列文件处理完毕后,处理相关的事情
+                                     },
+                                     'Key': function(up, file) {
+                                    // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+                                    // 该配置必须要在 unique_names: false , save_key: false 时才生效
+                                    
+                                    var scope = angular.element('#pickfiles0').scope();
+                                    var key = scope.card.cardPath + '/' + file.name;
+                                    // do something with key here
+                                    return key
+                                  }
+                                }
+                              });
+                            </script> 

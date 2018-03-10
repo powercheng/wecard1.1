@@ -213,8 +213,8 @@
 .wangEditor-container .wangEditor-txt h3,
 .wangEditor-container .wangEditor-txt h4,
 .wangEditor-container .wangEditor-txt h5 {
-  font-size: 1em;
   line-height: 1.4;
+  margin: 6px 0px;
 }
 .wangEditor-container .wangEditor-txt p *,
 .wangEditor-container .wangEditor-txt h1 *,

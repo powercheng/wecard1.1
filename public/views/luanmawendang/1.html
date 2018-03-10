@@ -1,0 +1,52 @@
+<div>
+	<p ng-if="card.companyName.name != ''" style="text-align: center;"><span style="color: {{card.companyName.color}}; font-size: {{card.companyName.size}}; border-radius: {{card.companyName.border}}; background-color: {{card.companyName.bgColor}}; padding: {{card.companyName.padding}}">{{card.companyName.name}}</span></p>
+
+	<p ng-if="card.personImage.name != ''" style="text-align: center"><img ng-src="http://image.mymicrocard.com/{{card.personImage.value}}" style="width: 80px; height: 80px; border-radius: 50%"></p>
+
+	<p ng-if="card.personName.name != ''" style="text-align: center;"><span style="color: {{card.personName.color}}; font-size: {{card.personName.size}}; border-radius: {{card.personName.border}}; background-color: {{card.personName.bgColor}}; padding: {{card.personName.padding}}">{{card.personName.name}}</span></p>
+
+	<p ng-if="card.personTitle.name != ''" style="text-align: center;"><span style="color: {{card.personTitle.color}}; font-size: {{card.personTitle.size}}; border-radius: {{card.personTitle.border}}; background-color: {{card.personTitle.bgColor}}; padding: {{card.personTitle.padding}}">{{card.personTitle.name}}</span></p>
+	
+	<p ng-if="card.personPhone.name != ''" style="text-align: center;"><span style="font-size: {{card.personPhone.size}}">
+		<a href="tel: {{card.personPhone.name}}" style="color: #333;
+	text-decoration: none;"><span>{{card.personPhone.name}}&nbsp</span><img src="/images/phone.png" width="15px" height="15px" />
+		</a>
+	</p>
+
+	<div style="background-color: white; margin: 0px;">
+		<ul style="	list-style-type: none; margin: 0; padding: 0; border: none;">
+			<li ng-if="card.companyPhone.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede">
+				<span style="width: 80px; position: absolute; color: #aaa;">座机电话</span>
+				<a href="tel: {{card.companyPhone.name}}" style="color: #333;
+	text-decoration: none;">
+					<span style="padding-left: 80px;">{{card.companyPhone.name}}&nbsp</span>
+					<img src="/images/phone.png" width="15px" height="15px" />
+				</a>
+			</li>
+			<li ng-if="card.companyAddress.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede">
+				<span style="width: 80px; position: absolute; color: #aaa;">联系地址</span>
+				<a href="http://apis.map.qq.com/tools/poimarker?type=0&marker=coord:{{card.companyAddress.value}};title:{{card.companyName.name}};addr:{{card.companyAddress.name}}&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp" style="color: #333;
+	text-decoration: none;">
+					<span style="padding-left: 80px;">{{card.companyAddress.name}}&nbsp</span>
+					<img src="/images/map.png" width="15px" height="15px" />
+				</a>
+			</li>
+			<li ng-if="card.wechat.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede">
+				<span style="width: 80px; position: absolute; color: #aaa;">微信号码</span>
+				<a onclick="show('codeBg2')" style="color: #333;
+	text-decoration: none;">
+					<span style="padding-left: 80px;">{{card.wechat.name}}&nbsp</span>
+					<img src="/images/QQ.png" width="15px" height="15px" />
+				</a>
+			</li>
+			<li ng-if="card.QQ.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede">
+				<span style="width: 80px; position: absolute; color: #aaa;">QQ号码</span>
+				<a onclick="show('codeBg1')" style="color: #333;
+	text-decoration: none;">
+					<span style="padding-left: 80px;">{{card.QQ.name}}&nbsp</span>
+					<img src="/images/QQ.png" width="15px" height="15px" />
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

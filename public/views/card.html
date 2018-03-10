@@ -1,4 +1,5 @@
 <div class="row">
+<!--   control panel -->
 	<div class="col-md-2">
 		<div style="margin:10px" ng-click="show(0)"><button class="btn btn-primary btn-block">上编辑框</button></div>
 		<div style="margin:10px" ng-click="show(1)"><button class="btn btn-primary btn-block">模板框</button></div>
@@ -12,18 +13,25 @@
 		</div>
 		<div id="qrcode"></div>
 	</div>
+
+
+
 	<div class="col-md-4" ng-hide="myVar[0]" >		
 		<span>上编辑框</span><button ng-click="delText(0)" style="float: right">清空内容</button>
 		<div ng-model="text[0]" contenteditable="true" class="editor-text" style="background-color: {{bgColor}}"></div>
 	</div>
 
+
+
+
 	<div class="col-md-4" ng-hide="myVar[1]">
 		<button style="margin-bottom: 12px;" class="btn btn-primary btn-lg btn-block" ng-click="toggle(3)" ng-hide="!myVar[3]">填写信息，选择模板</button>
 		<div ng-hide="myVar[3]">
+      <label style="width: 20%">公司名:</label><input type="text" ng-model="companyName">
 			<div id="container0"><label>头像：</label><button id="pickfiles0">{{pImage}}</div>
 			<label style="width: 20%">姓名:</label><input type="text" ng-model="name"><br>
       <label style="width: 20%">电话:</label><input type="text" ng-model="phone"><br>
-			<label style="width: 20%">公司名:</label><input type="text" ng-model="companyName">
+
 			<img ng-src="/images/up.png" width="30px" height="30px" style="float: right" ng-click="toggle(3)" />
 			<div class="mutexTab">
 				<div class="mut mused" ng-click="changeMut(0)">
@@ -84,10 +92,17 @@
 		</div>
 	</div>
 
+
+
+
+
 	<div class="col-md-4" ng-hide="myVar[2]">
-		<span>上编辑框</span><button ng-click="delText(1)" style="float: right">清空内容</button>	
+		<span>下编辑框</span><button ng-click="delText(1)" style="float: right">清空内容</button>	
 		<div ng-model="text[1]" contenteditable="true" class="editor-text"></div>
 	</div>
+
+
+
 
 	<div class="col-md-4" id="main">
 		<div class="main" style="background-color: {{bgColor}};">

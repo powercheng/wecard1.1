@@ -34,6 +34,7 @@ router.post('/upload', upload.single('wangEditorH5File'), function(req, res, nex
 
 
 router.use(function(req, res, next) {
+	console.log("i am the first one use");
 	res.locals.currentUser = req.user;
 	res.locals.errors = req.flash("error");
 	res.locals.infos = req.flash("info");
@@ -69,17 +70,20 @@ router.post('/users', function(req, res, next) {
 /*测试用*/
 
 router.get("/", ensureAuthenticated, function(req, res, next) {
-/*	Card.find()
-	.sort({ createdAt: "descending" })
-	.exec(function(err, cards) {
-		if (err) { return next(err); }*/
+	res.locals.cards = JSON.parse(res.locals.currentUser.cards);
+	res.render("cards");
+});
 
-		res.render("cards");
-	});
+router.get("/update", ensureAuthenticated, function(req, res, next) {
+	if (req.query.name != req.user.username) {
+		res.redirect('/login');
+	} else {
+		
+		res.redirect('/signup');
+	}
+});
 
-/*router.get("/test.html", ensureAuthenticated, function(req, res, next) {
-	next();
-});*/
+
 
 router.get("/signup", function(req, res) {
 	res.render("signup");
@@ -108,6 +112,7 @@ router.post("/signup", function(req, res, next) {
 }));
 
 router.get("/login", function(req, res) {
+	console.log("router get /login");
 	res.render("login");
 });
 
@@ -178,6 +183,7 @@ passport.use("login", new LocalStrategy(
 	}));
 
 passport.serializeUser((user, done) => {
+	console.log("passport serializeUser");
 	done(null, user.id);
 });
 
@@ -189,6 +195,7 @@ passport.deserializeUser(function(id, done) {
 
 function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) {
+		console.log("ensureAuthenticated")
 		next();
 	} else {
 		req.flash("info", "请先登录");

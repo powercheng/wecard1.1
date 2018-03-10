@@ -20,13 +20,13 @@
         module.exports = factory(
             // 传入 jquery ，支持使用 npm 方式或者自己定义jquery的路径
             require('jquery')
-        );
+            );
     } else {
         // 全局模式
         factory(window.jQuery);
     }
 })(function($){
-    
+
     // 验证是否引用jquery
     if (!$ || !$.fn || !$.fn.jquery) {
         alert('在引用wangEditor.js之前，先引用jQuery，否则无法使用 wangEditor');
@@ -317,9 +317,9 @@ _e(function (E, $) {
     // 保存选区数据
     E.fn.saveSelection = ieRange ? emptyFn : function (range) {
         var self = this,
-            _parentElem,
-            selection,
-            txt = self.txt.$txt.get(0);
+        _parentElem,
+        selection,
+        txt = self.txt.$txt.get(0);
 
         if (range) {
             _parentElem = range.commonAncestorContainer;
@@ -487,9 +487,9 @@ _e(function (E, $) {
     // 保存选区数据
     E.fn.saveSelection = function (range) {
         var self = this,
-            _parentElem,
-            selection,
-            txt = self.txt.$txt.get(0);
+        _parentElem,
+        selection,
+        txt = self.txt.$txt.get(0);
 
         if (range) {
             _parentElem = range.parentElement();
@@ -514,8 +514,8 @@ _e(function (E, $) {
     // 恢复选中区域
     E.fn.restoreSelection = function (currentRange){
         var editor = this,
-            selection,
-            range;
+        selection,
+        range;
 
         currentRange = currentRange || editor.currentRange();
         if(!currentRange){
@@ -535,7 +535,7 @@ _e(function (E, $) {
                 // IE8 插入表情会报错
                 range.collapse(false);
             } catch (ex) {
-                
+
             }
             
         }else{
@@ -547,7 +547,7 @@ _e(function (E, $) {
 });
 // editor command hooks
 _e(function (E, $) {
-    
+
     E.fn.commandHooks = function () {
         var editor = this;
         var commandHooks = {};
@@ -751,9 +751,9 @@ _e(function (E, $) {
         if (!matchesSelector) {
             // 定义 matchesSelector 函数
             matchesSelector = elem.webkitMatchesSelector || 
-                              elem.mozMatchesSelector ||
-                              elem.oMatchesSelector || 
-                              elem.matchesSelector;
+            elem.mozMatchesSelector ||
+            elem.oMatchesSelector || 
+            elem.matchesSelector;
         }
         if (!matchesSelector) {
             // 如果浏览器本身不支持 matchesSelector 则使用自定义的hook
@@ -1591,7 +1591,7 @@ _e(function (E, $) {
 });
 // dropListfn api
 _e(function (E, $) {
-    
+
     var DropList = E.DropList;
 
     // 渲染
@@ -1812,7 +1812,7 @@ _e(function (E, $) {
 });
 // dropPanel fn api
 _e(function (E, $) {
-   
+
     var DropPanel = E.DropPanel;
 
     // 渲染
@@ -2181,9 +2181,9 @@ _e(function (E, $) {
             // 如果不是div（是textarea），则创建一个div
             $txt = $(
                 '<div class="wangEditor-txt" contentEditable="true">' +
-                    currentValue +
+                currentValue +
                 '</div>'
-            );
+                );
         }
 
         // 试图最后插入一个空行，ready之后才行
@@ -2413,9 +2413,9 @@ _e(function (E, $) {
                         if (pasteHtml) {
                             // 替换特殊字符
                             pasteHtml = pasteHtml.replace(/[ ]/g, '&nbsp;')
-                                                 .replace(/</g, '&lt;')
-                                                 .replace(/>/g, '&gt;')
-                                                 .replace(/\n/g, '</p><p>');
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/\n/g, '</p><p>');
                             // 拼接
                             resultHtml = '<p>' + pasteHtml + '</p>';
 
@@ -2536,7 +2536,7 @@ _e(function (E, $) {
                 return '<' + nodeName + '>' + htmlForP + '</' + nodeName + '>';
 
             } else if (['ul', 'ol'].indexOf(nodeName) >= 0) {
-                
+
                 // ul ol元素，获取子元素（li元素）的text link img，再拼接
                 $elem = $(elem);
                 $elem.children().each(function () {
@@ -2554,9 +2554,9 @@ _e(function (E, $) {
                     htmlForLi += '<li>' + html + '</li>';
                 });
                 return '<' + nodeName + '>' + htmlForLi + '</' + nodeName + '>';
-            
+
             } else {
-                
+
                 // 其他元素，移除元素属性
                 $elem = $(removeAttrs(elem));
                 return $('<div>').append($elem).html();
@@ -3031,7 +3031,7 @@ _e(function (E, $) {
         //IE低版本不支持 arr.indexOf 
         Array.prototype.indexOf = function(elem){
             var i = 0,
-                length = this.length;
+            length = this.length;
             for(; i<length; i++){
                 if(this[i] === elem){
                     return i;
@@ -3134,12 +3134,12 @@ _e(function (E, $) {
         unlink: '取消链接',
         table: '表格',
         emotion: '表情',
-        img: '图片',
+        img: '上传文件',
         uploadImg: '上传图片',
         linkImg: '网络图片',
         video: '视频',
-        'width': '宽',
-        'height': '高',
+        width: '宽',
+        height: '高',
         location: '位置',
         loading: '加载中',
         searchlocation: '搜索位置',
@@ -3150,7 +3150,8 @@ _e(function (E, $) {
         undo: '撤销',
         redo: '重复',
         fullscreen: '全屏',
-        openLink: '打开链接'
+        openLink: '打开链接',
+        Pbgcolor: '块背景色',
     };
 
     // 英文
@@ -3195,7 +3196,8 @@ _e(function (E, $) {
         undo: 'Undo',
         redo: 'Redo',
         fullscreen: 'Full screnn',
-        openLink: 'open link'
+        openLink: 'open link',
+        Pbgcolor: 'block color',
     };
 });
 // 全局配置
@@ -3223,35 +3225,32 @@ _e(function (E, $) {
 
     // 菜单配置
     E.config.menus = [
-        'source',
-        'bold',
-        'underline',
-        'italic',
-        'strikethrough',
-        'eraser',
-        'forecolor',
-        'bgcolor',
-        'quote',
-        'fontfamily',
-        'fontsize',
-        'head',
-        'unorderlist',
-        'orderlist',
-        'alignleft',
-        'aligncenter',
-        'alignright',
-        'lineheight',
-        'indent',
-        'link',
-        'unlink',
-        'table',
-        'emotion',
-        'img',
-        'video',
-        'insertcode',
-        'undo',
-        'redo',
-        'botline',
+    'source',
+    'bold',
+    'underline',
+    'italic',
+    'eraser',
+    'forecolor',
+    'bgcolor',
+    'Pbgcolor',
+    'quote',
+    'fontfamily',
+    'fontsize',
+    'head',
+    'unorderlist',
+    'orderlist',
+    'alignleft',
+    'aligncenter',
+    'alignright',
+    'lineheight',
+    'indent',
+    'link',
+    'unlink',
+    'emotion',
+    'img',
+    'undo',
+    'redo',
+    'botline',
     ];
 
     // 颜色配置
@@ -3277,7 +3276,7 @@ _e(function (E, $) {
 
     // 字体
     E.config.familys = [
-        '宋体', '黑体', '楷体', '微软雅黑',
+    '宋体', '黑体', '楷体', '微软雅黑', '隶书','Times New Roman'
     ];
 
     // 字号
@@ -3302,62 +3301,62 @@ _e(function (E, $) {
         'weibo': {
             title: '微博表情',
             data: [
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
-                    value: '[草泥马]'    
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
-                    value: '[神马]'    
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
-                    value: '[浮云]'    
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
-                    value: '[给力]'    
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
-                    value: '[围观]'    
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
-                    value: '[威武]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif',
-                    value: '[熊猫]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif',
-                    value: '[兔子]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif',
-                    value: '[奥特曼]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif',
-                    value: '[囧]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/hufen_thumb.gif',
-                    value: '[互粉]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c4/liwu_thumb.gif',
-                    value: '[礼物]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif',
-                    value: '[呵呵]'
-                },
-                {
-                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif',
-                    value: '[哈哈]'
-                }
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
+                value: '[草泥马]'    
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
+                value: '[神马]'    
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
+                value: '[浮云]'    
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
+                value: '[给力]'    
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
+                value: '[围观]'    
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
+                value: '[威武]'
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif',
+                value: '[熊猫]'
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif',
+                value: '[兔子]'
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif',
+                value: '[奥特曼]'
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif',
+                value: '[囧]'
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/hufen_thumb.gif',
+                value: '[互粉]'
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c4/liwu_thumb.gif',
+                value: '[礼物]'
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif',
+                value: '[呵呵]'
+            },
+            {
+                icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif',
+                value: '[哈哈]'
+            }
             ]
         }
     };
@@ -3387,8 +3386,8 @@ _e(function (E, $) {
 
     // 自定义上传是的header参数
     E.config.uploadHeaders = {
-         /* 'Accept' : 'text/x-json' */
-    };
+       /* 'Accept' : 'text/x-json' */
+   };
 
     // 跨域上传时传递 cookie，默认为 true
     E.config.withCredentials = true;
@@ -3409,7 +3408,7 @@ _e(function (E, $) {
 // 全局UI
 _e(function (E, $) {
 
-     E.UI = {};
+   E.UI = {};
 
      // 为菜单自定义配置的UI
      E.UI.menus = {
@@ -3530,8 +3529,8 @@ _e(function (E, $) {
             normal: '<a href="#" tabindex="-1"><i class="wangeditor-menu-img-enlarge2"></i></a>',
             selected: '<a href="#" tabindex="-1" class="selected"><i class="wangeditor-menu-img-shrink2"></i></a>'
         }
-     };
-     
+    };
+
 });
 // 对象配置
 _e(function (E, $) {
@@ -3676,7 +3675,7 @@ _e(function (E, $) {
 });
 // italic 菜单
 _e(function (E, $) {
-    
+
     E.createMenu(function (check) {
         var menuId = 'italic';
         if (!check(menuId)) {
@@ -3734,12 +3733,12 @@ _e(function (E, $) {
         $.each(configColors, function (k, v) {
             $content.append(
                 [
-                    '<a href="#" class="color-item"',
-                    '    title="' + v + '" commandValue="' + k + '" ',
-                    '    style="color: ' + k + '" ',
-                    '><i class="wangeditor-menu-img-pencil"></i></a>'
+                '<a href="#" class="color-item"',
+                '    title="' + v + '" commandValue="' + k + '" ',
+                '    style="color: ' + k + '" ',
+                '><i class="wangeditor-menu-img-pencil"></i></a>'
                 ].join('')
-            );
+                );
         });
         $content.on('click', 'a[commandValue]', function (e) {
             // 执行命令
@@ -3774,9 +3773,109 @@ _e(function (E, $) {
     });
 
 });
+// parent bgcolor 菜单
+_e(function (E, $) {
+    E.createMenu(function (check) {
+        var menuId = 'Pbgcolor';
+        if (!check(menuId)) {
+            return;
+        }
+        var editor = this;
+        var lang = editor.config.lang;
+        var configColors = editor.config.colors;
+
+/*        // 检查元素是否有 background-color: 内联样式
+        function checkElemFn(elem) {
+            var cssText;
+            if (elem && elem.style && elem.style.cssText != null) {
+                cssText = elem.style.cssText;
+                if (cssText && cssText.indexOf('background-color:') >= 0) {
+                    return true;
+                }
+            }
+            return false;
+        }*/
+
+        // 创建 menu 对象
+        var menu = new E.Menu({
+            editor: editor,
+            id: menuId,
+            title: lang.Pbgcolor
+        });
+
+        // 创建 dropPanel
+        var $content = $('<div></div>');
+        $.each(configColors, function (k, v) {
+            $content.append(
+                [
+                '<a href="#" class="color-item"',
+                '    title="' + v + '" commandValue="' + k + '" ',
+                '    style="color: ' + k + '" ',
+                '><i class="fa fa-square"></i></a>'
+                ].join('')
+                );
+        });
+        $content.on('click', 'a[commandValue]', function (e) {
+            // 执行命令
+            var $elem = $(this);
+            var commandValue = $elem.attr('commandValue');
+
+            var rangeElem = editor.getRangeElem();
+            var $rangeElem;
+            if (!rangeElem) {
+                e.preventDefault();
+                return;
+            }
+            rangeElem = editor.getLegalTags(rangeElem);
+            $rangeElem = $(rangeElem);
+            console.log($rangeElem);
+            // 自定义command事件
+            function commandFn() {
+                $rangeElem.css('background-color',commandValue);
+/*                $quote = $('<p>' + $rangeElem.text() + '</p>');
+                $rangeElem.after($quote).remove();
+                $quote.wrap('<blockquote>');*/
+            }
+
+            // 自定义 callback 事件
+            function callback() {
+                // callback中，设置range为quote
+                var editor = this;
+                if ($rangeElem) {
+                    editor.restoreSelectionByElem($rangeElem.get(0));
+                }
+            }
+
+            // 执行自定义命令
+            editor.customCommand(e, commandFn, callback);
+        });
+            
+
+        menu.dropPanel = new E.DropPanel(editor, menu, {
+            $content: $content,
+            width: 125
+        });
+
+/*        // 定义 update selected 事件
+        menu.updateSelectedEvent = function () {
+            var rangeElem = editor.getRangeElem();
+            rangeElem = editor.getSelfOrParentByName(rangeElem, 'span,font', checkElemFn);
+            
+            if (rangeElem) {
+                return true;
+            }
+            return false;
+        };*/
+
+        // 增加到editor对象中
+        editor.menus[menuId] = menu;
+    });
+
+});
+
+
 // bgcolor 菜单
 _e(function (E, $) {
-
     E.createMenu(function (check) {
         var menuId = 'bgcolor';
         if (!check(menuId)) {
@@ -3810,12 +3909,12 @@ _e(function (E, $) {
         $.each(configColors, function (k, v) {
             $content.append(
                 [
-                    '<a href="#" class="color-item"',
-                    '    title="' + v + '" commandValue="' + k + '" ',
-                    '    style="color: ' + k + '" ',
-                    '><i class="wangeditor-menu-img-brush"></i></a>'
+                '<a href="#" class="color-item"',
+                '    title="' + v + '" commandValue="' + k + '" ',
+                '    style="color: ' + k + '" ',
+                '><i class="wangeditor-menu-img-brush"></i></a>'
                 ].join('')
-            );
+                );
         });
         $content.on('click', 'a[commandValue]', function (e) {
             // 执行命令
@@ -3834,10 +3933,7 @@ _e(function (E, $) {
                 editor.command(e, 'BackColor', commandValue);
             }
         });
-        menu.dropPanel = new E.DropPanel(editor, menu, {
-            $content: $content,
-            width: 125
-        });
+
 
         // 定义 update selected 事件
         menu.updateSelectedEvent = function () {
@@ -3996,8 +4092,11 @@ _e(function (E, $) {
 
         // 更新内容
         function updateValue() {
+
             var $code = menu.$codeTextarea;
             var $txt = editor.txt.$txt;
+            var value = $code.val();
+            
             var value = $.trim($code.val()); // 取值
 
             if (!value) {
@@ -4006,7 +4105,7 @@ _e(function (E, $) {
             
             // 过滤js代码
             if (editor.config.jsFilter) {
-                
+
                 value = value.replace(/<script[\s\S]*?<\/script>/ig, '');
             }
             // 赋值
@@ -4017,7 +4116,7 @@ _e(function (E, $) {
             }
         }
 
-        // 定义click事件
+        // 定义click事件, 从界面到source.
         menu.clickEvent = function (e) {
             var self = this;
             var editor = self.editor;
@@ -4059,7 +4158,7 @@ _e(function (E, $) {
             txtHtml = $txt.html();
         };
 
-        // 定义选中状态下的click事件
+        // 定义选中状态下的click事件, 从source到界面触发
         menu.clickEventSelected = function (e) {
             var self = this;
             var editor = self.editor;
@@ -4073,7 +4172,6 @@ _e(function (E, $) {
 
             // 更新内容
             updateValue();
-
             // 渲染
             $code.after($txt).hide();
             $txt.show();
@@ -4141,10 +4239,10 @@ _e(function (E, $) {
                 e.preventDefault();
                 return;
             }
-
+            console.log(rangeElem);
             rangeElem = editor.getLegalTags(rangeElem);
             $rangeElem = $(rangeElem);
-
+            console.log($rangeElem);
             // 无文字，则不允许执行引用
             if (!$rangeElem.text()) {
                 return;
@@ -4366,8 +4464,8 @@ _e(function (E, $) {
                 'commandValue': 'title'
                 ...
             }
-        */
-        $.each(configFamilys, function (k, v) {
+            */
+            $.each(configFamilys, function (k, v) {
             // configFamilys 是数组，data 是对象
             data[v] = v;
         });
@@ -4394,6 +4492,7 @@ _e(function (E, $) {
         editor.menus[menuId] = menu;
     });
 });
+
 // 字号 菜单
 _e(function (E, $) {
     E.createMenu(function (check) {
@@ -4421,7 +4520,7 @@ _e(function (E, $) {
                 'commandValue': 'title'
                 ...
             }
-        */
+            */
 
         // 创建droplist
         var tpl = '<span style="font-size:{#title};">{#title}</span>';
@@ -4445,6 +4544,7 @@ _e(function (E, $) {
         editor.menus[menuId] = menu;
     });
 });
+
 // head 菜单
 _e(function (E, $) {
     E.createMenu(function (check) {
@@ -4478,12 +4578,12 @@ _e(function (E, $) {
                 'commandValue': 'title'
                 ...
             }
-        */
+            */
 
-        var isOrderedList;
-        function beforeEvent(e) {
-            if (editor.queryCommandState('InsertOrderedList')) {
-                isOrderedList = true;
+            var isOrderedList;
+            function beforeEvent(e) {
+                if (editor.queryCommandState('InsertOrderedList')) {
+                    isOrderedList = true;
 
                 // 先取消有序列表
                 editor.command(e, 'InsertOrderedList');
@@ -4523,6 +4623,7 @@ _e(function (E, $) {
         editor.menus[menuId] = menu;
     });
 });
+
 // unorderlist 菜单
 _e(function (E, $) {
 
@@ -5415,11 +5516,11 @@ _e(function (E, $) {
         var $widthInput = $('<input type="text" value="640" style="width:50px;text-align:center;"/>');
         var $heightInput = $('<input type="text" value="498" style="width:50px;text-align:center;"/>');
         $sizeContainer.append('<span> ' + lang.width + ' </span>')
-                      .append($widthInput)
-                      .append('<span> px &nbsp;&nbsp;&nbsp;</span>')
-                      .append('<span> ' + lang.height + ' </span>')
-                      .append($heightInput)
-                      .append('<span> px </span>');
+        .append($widthInput)
+        .append('<span> px &nbsp;&nbsp;&nbsp;</span>')
+        .append('<span> ' + lang.height + ' </span>')
+        .append($heightInput)
+        .append('<span> px </span>');
         var $btnContainer = $('<div></div>');
         var $howToCopy = $('<a href="http://www.kancloud.cn/wangfupeng/wangeditor2/134973" target="_blank" style="display:inline-block;margin-top:10px;margin-left:10px;color:#999;">如何复制视频链接？</a>');
         var $btnSubmit = $('<button class="right">' + lang.submit + '</button>');
@@ -5465,7 +5566,7 @@ _e(function (E, $) {
 
             // 设置高度和宽度
             $link.attr('width', width)
-                 .attr('height', height);
+            .attr('height', height);
 
             // 拼接字符串
             html = html.replace('{content}', $div.append($link).html());
@@ -5607,17 +5708,17 @@ _e(function (E, $) {
                 if (inputKeyup) {
                    // 并绑定搜索事件 - input 支持 keyup
                    searchFn = function (e) {
-                       if (e.type === 'keyup' && e.keyCode === 13) {
-                           e.preventDefault();
-                       }
-                       if (timeoutId) {
-                           clearTimeout(timeoutId);
-                       }
-                       timeoutId = setTimeout(mapData.searchMap, 500);
-                   };
-                   $cityInput.on('keyup change paste', searchFn);
-                   $searchInput.on('keyup change paste', searchFn); 
-                } else {
+                     if (e.type === 'keyup' && e.keyCode === 13) {
+                         e.preventDefault();
+                     }
+                     if (timeoutId) {
+                         clearTimeout(timeoutId);
+                     }
+                     timeoutId = setTimeout(mapData.searchMap, 500);
+                 };
+                 $cityInput.on('keyup change paste', searchFn);
+                 $searchInput.on('keyup change paste', searchFn); 
+             } else {
                     // 并绑定搜索事件 - input 不支持 keyup
                     searchFn = function () {
                         if (!$content.is(':visible')) {
@@ -5713,8 +5814,8 @@ _e(function (E, $) {
         }).attr('placeholder', lang.searchlocation);
         var $clearBtn = $('<button class="right link">' + lang.clearLocation + '</button>');
         $inputContainer.append($clearBtn)
-                       .append($cityInput)
-                       .append($searchInput);
+        .append($cityInput)
+        .append($searchInput);
         $content.append($inputContainer);
 
         // 清除位置按钮
@@ -5754,8 +5855,8 @@ _e(function (E, $) {
         var $check = $('<input type="checkbox">');
         $checkLabel.append($check).append('<span style="display:inline-block;margin-left:5px;">  ' + lang.dynamicMap + '</span>');
         $btnContainer.append($checkLabel)
-                     .append($btnSubmit)
-                     .append($btnCancel);
+        .append($btnSubmit)
+        .append($btnCancel);
         $content.append($btnContainer);
 
         function callback() {
@@ -5773,22 +5874,22 @@ _e(function (E, $) {
         $btnSubmit.click(function (e) {
             e.preventDefault();
             var map = mapData.map,
-                isDynamic = $check.is(':checked'),
-                markers =  mapData.markers,
+            isDynamic = $check.is(':checked'),
+            markers =  mapData.markers,
 
-                center = map.getCenter(),
-                centerLng = center.lng,
-                centerLat = center.lat,
+            center = map.getCenter(),
+            centerLng = center.lng,
+            centerLat = center.lat,
 
-                zoom = map.getZoom(),
+            zoom = map.getZoom(),
 
-                size = map.getSize(),
-                sizeWidth = size.width,
-                sizeHeight = size.height,
+            size = map.getSize(),
+            sizeWidth = size.width,
+            sizeHeight = size.height,
 
-                position,
-                src,
-                iframe;
+            position,
+            src,
+            iframe;
 
             if(isDynamic){
                 //动态地址
@@ -5800,9 +5901,9 @@ _e(function (E, $) {
 
             //src参数
             src = src +'center=' + centerLng + ',' + centerLat +
-                '&zoom=' + zoom +
-                '&width=' + sizeWidth +
-                '&height=' + sizeHeight;
+            '&zoom=' + zoom +
+            '&width=' + sizeWidth +
+            '&height=' + sizeHeight;
             if(markers.length > 0){
                 src = src + '&markers=';
 
@@ -6102,8 +6203,8 @@ _e(function (E, $) {
 
                 // 替换标签
                 val = val.replace(/&/gm, '&amp;')
-                         .replace(/</gm, '&lt;')
-                         .replace(/>/gm, '&gt;');
+                .replace(/</gm, '&lt;')
+                .replace(/>/gm, '&gt;');
 
                 // ---- menu 未选中状态 ----
                 if (!menu.selected) {
@@ -6331,7 +6432,7 @@ _e(function (E, $) {
                 E.$window.height() - 
                 menuContainer.height() - 
                 (txtOuterHeight - txtHeight)  // 去掉内边距和外边距
-            );
+                );
 
             // 取消menuContainer的内联样式（menu吸顶时，会为 menuContainer 设置一些内联样式）
             editor.menuContainer.$menuContainer.attr('style', '');
@@ -7188,7 +7289,7 @@ _e(function (E, $) {
 });
 // upload img 插件 粘贴图片
 _e(function (E, $) {
-    
+
     E.plugin(function () {
         var editor = this;
         var txt = editor.txt;
@@ -7418,9 +7519,9 @@ _e(function (E, $) {
 
             // 拼接 渲染到页面上
             $toolbar.append($triangle)
-                    .append($delete)
-                    .append($zoomSmall)
-                    .append($zoomBig);
+            .append($delete)
+            .append($zoomSmall)
+            .append($zoomBig);
             editor.$editorContainer.append($toolbar);
             isRendered = true;
         }
@@ -7601,9 +7702,7 @@ _e(function (E, $) {
         var $triangle = $('<div class="tip-triangle"></div>');
 
         var $menuContainer = $('<div></div>');
-        var $delete = $('<a href="#"><i class="wangeditor-menu-img-trash-o"></i></a>');
-        var $zoomSmall = $('<a href="#"><i class="wangeditor-menu-img-search-minus"></i></a>');
-        var $zoomBig = $('<a href="#"><i class="wangeditor-menu-img-search-plus"></i></a>');
+        var $zoomSmall = $('<a href="#"><i class="fa fa-css3"></i></a>');
         // var $floatLeft = $('<a href="#"><i class="wangeditor-menu-img-align-left"></i></a>');
         // var $noFloat = $('<a href="#"><i class="wangeditor-menu-img-align-justify"></i></a>');
         // var $floatRight = $('<a href="#"><i class="wangeditor-menu-img-align-right"></i></a>');
@@ -7618,6 +7717,12 @@ _e(function (E, $) {
         var $linkBtnSubmit = $('<button class="right">' + lang.submit + '</button>');
         var $linkBtnCancel = $('<button class="right gray">' + lang.cancel + '</button>');
 
+        var $sizeInputContainer = $('<div style="display:none;"></div>');
+        var $sizeWidth = $('<input type="text" style="height:26px; margin-left:10px; width:30px;"/>');
+        var $sizeHeight = $('<input type="text" style="height:26px; margin-left:10px; width:30px;"/>');
+        var $sizeBorder = $('<input type="text" style="height:26px; margin-left:10px; width:30px;"/>');
+        var $sizeBtnSubmit = $('<button class="right">' + lang.submit + '</button>');
+        var $sizeBtnCancel = $('<button class="right gray">' + lang.cancel + '</button>');
         // 记录是否正在拖拽
         var isOnDrag = false;
 
@@ -7693,9 +7798,7 @@ _e(function (E, $) {
             bindDragEvent();
 
             // 菜单放入 container
-            $menuContainer.append($delete)
-                            .append($zoomSmall)
-                            .append($zoomBig)
+            $menuContainer.append($zoomSmall)
                             // .append($floatLeft)
                             // .append($noFloat)
                             // .append($floatRight);
@@ -7707,14 +7810,21 @@ _e(function (E, $) {
 
             // 链接input放入container
             $linkInputContainer.append($linkInput)
-                               .append($linkBtnCancel)
-                               .append($linkBtnSubmit);
+            .append($linkBtnCancel)
+            .append($linkBtnSubmit);
+
+            $sizeInputContainer.append($('<label>宽度</label>')).append($sizeWidth).append($('<span>px </span>'))
+            .append($('<label>高度</label>')).append($sizeHeight).append($('<span>px </span>'))
+            .append($('<label>边框</label>')).append($sizeBorder).append($('<span>% </span>'))
+            .append($sizeBtnCancel)
+            .append($sizeBtnSubmit);
 
             // 拼接 渲染到页面上
             $toolbar.append($triangle)
-                    .append($menuContainer)
-                    .append($linkInputContainer);
-                    
+            .append($menuContainer)
+            .append($linkInputContainer)
+            .append($sizeInputContainer);
+
             editor.$editorContainer.append($toolbar).append($dragPoint);
             isRendered = true;
         }
@@ -7741,57 +7851,7 @@ _e(function (E, $) {
                 }
             }
 
-            // 删除
-            $delete.click(function (e) {
-                // 删除之前先unlink
-                imgLink(e, '');
 
-                // 删除图片
-                commandFn = function () {
-                    $currentImg.remove();
-                };
-                customCommand(e, function () {
-                    setTimeout(hide, 100);
-                });
-            });
-
-            // 放大
-            $zoomBig.click(function (e) {
-                commandFn = function () {
-                    var img = $currentImg.get(0);
-                    var width = img.width;
-                    var height = img.height;
-                    width = width * 1.1;
-                    height = height * 1.1;
-
-                    $currentImg.css({
-                        width: width + 'px',
-                        height: height + 'px'
-                    });
-                };
-                customCommand(e, function () {
-                    setTimeout(show);
-                });
-            });
-
-            // 缩小
-            $zoomSmall.click(function (e) {
-                commandFn = function () {
-                    var img = $currentImg.get(0);
-                    var width = img.width;
-                    var height = img.height;
-                    width = width * 0.9;
-                    height = height * 0.9;
-
-                    $currentImg.css({
-                        width: width + 'px',
-                        height: height + 'px'
-                    });
-                };
-                customCommand(e, function () {
-                    setTimeout(show);
-                });
-            });
 
             // // 左浮动
             // $floatLeft.click(function (e) {
@@ -7880,6 +7940,37 @@ _e(function (E, $) {
                 $menuContainer.hide();
                 $linkInputContainer.show();
             });
+
+            // size
+            $zoomSmall.click(function (e) {
+                e.preventDefault();
+                $menuContainer.hide();
+                $sizeInputContainer.show();
+            });
+
+            $sizeBtnSubmit.click(function (e) {
+                e.preventDefault();
+                var width = $sizeWidth.val();
+                var height = $sizeHeight.val();
+                var border = $sizeBorder.val();
+                $currentImg.css({
+                    width: width + 'px',
+                    height: height + 'px',
+                    borderRadius: border + '%'
+                });
+                // 隐藏 toolbar
+                setTimeout(hide);
+            });
+
+            $sizeBtnCancel.click(function (e) {
+                e.preventDefault();
+                $menuContainer.show();
+                $sizeInputContainer.hide();
+            });
+
+
+
+
             // 设置链接
             $linkBtnSubmit.click(function (e) {
                 e.preventDefault();
@@ -8159,7 +8250,7 @@ _e(function (E, $) {
             }
 
             $toolbar.append($triangle)
-                    .append($triggerLink);
+            .append($triggerLink);
 
             editor.$editorContainer.append($toolbar);
 
@@ -8586,8 +8677,8 @@ _e(function (E, $) {
         // this 指向 editor 对象自身
         var editor = this;
         var templates = [
-            '<p>{{name}}</p>',
-            '<p>模板2</p>'
+        '<p>{{name}}</p>',
+        '<p>模板2</p>'
 
 
 
@@ -8675,7 +8766,7 @@ _e(function (E, $) {
 _e(function (E, $) {
     E.info('本页面富文本编辑器由 wangEditor 提供 http://wangeditor.github.io/ ');
 });
-    
+
     // 最终返回wangEditor构造函数
     return window.wangEditor;
 });
