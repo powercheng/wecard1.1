@@ -557,7 +557,6 @@ _e(function (E, $) {
             var $elem = $(html);
             var rangeElem = editor.getRangeElem();
             var targetElem;
-            
             targetElem = editor.getLegalTags(rangeElem);
             if (!targetElem) {
                 return;
@@ -2242,7 +2241,7 @@ _e(function (E, $) {
             // ff时用 txtHtml === '<br>' 判断，其他用 !txtHtml 判断
             if (!txtHtml || txtHtml === '<br>') {
                 // 内容空了
-                $p = $('<p><br/></p>');
+                $p = $('<p><br></p>');
                 $txt.html(''); // 一定要先清空，否则在 ff 下有问题
                 $txt.append($p);
                 editor.restoreSelectionByElem($p.get(0));
@@ -2490,7 +2489,7 @@ _e(function (E, $) {
                 resultHtml += '<p>' + elem.textContent + '</p>';
             } else if (nodeName === 'br') {
                 // <br>保留
-                resultHtml += '<br/>';
+                resultHtml += '<br>';
             }
             else {
                 // 忽略的标签
@@ -3218,7 +3217,7 @@ _e(function (E, $) {
     E.config.jsFilter = true;
 
     // 编辑器允许的标签
-    E.config.legalTags = 'p,h1,h2,h3,h4,h5,h6,blockquote,table,ul,ol,pre';
+    E.config.legalTags = 'p,h1,h2,h3,h4,h5,h6,blockquote,table,ul,ol,pre, div';
 
     // 语言包
     E.config.lang = E.langs['zh-cn'];
@@ -3233,17 +3232,15 @@ _e(function (E, $) {
     'forecolor',
     'bgcolor',
     'Pbgcolor',
-    'quote',
+/*    'quote',*/
     'fontfamily',
-    'fontsize',
     'head',
     'unorderlist',
     'orderlist',
     'alignleft',
     'aligncenter',
     'alignright',
-    'lineheight',
-    'indent',
+/*    'lineheight',*/
     'link',
     'unlink',
     'emotion',
@@ -3251,6 +3248,7 @@ _e(function (E, $) {
     'undo',
     'redo',
     'botline',
+    'template',
     ];
 
     // 颜色配置
@@ -3280,7 +3278,7 @@ _e(function (E, $) {
     ];
 
     // 字号
-    E.config.fontsizes = {
+/*    E.config.fontsizes = {
         // 格式：'value': 'title'
         1: '12px',
         2: '13px',
@@ -3289,7 +3287,7 @@ _e(function (E, $) {
         5: '24px',
         6: '32px',
         7: '48px'
-    };
+    };*/
 
     // 表情包
     E.config.emotionsShow = 'icon'; // 显示项，默认为'icon'，也可以配置成'value'
@@ -3528,6 +3526,12 @@ _e(function (E, $) {
         fullscreen: {
             normal: '<a href="#" tabindex="-1"><i class="wangeditor-menu-img-enlarge2"></i></a>',
             selected: '<a href="#" tabindex="-1" class="selected"><i class="wangeditor-menu-img-shrink2"></i></a>'
+        },
+        template: {
+        	normal: '<a href="#" tabindex="-1"><i class="wangeditor-menu-img-terminal"></i></a>',
+        }, 
+        Pbgcolor: {
+        	normal: '<a href="#" tabindex="-1"><i class="fa fa-square-o"></i></a>',
         }
     };
 
@@ -3873,9 +3877,76 @@ _e(function (E, $) {
 
 });
 
+// 金蛋 菜单
+_e(function (E, $) {
+
+    // 用 createMenu 方法创建菜单
+    E.createMenu(function (check) {
+
+        // 定义菜单id，不要和其他菜单id重复。编辑器自带的所有菜单id，可通过『参数配置-自定义菜单』一节查看
+        var menuId = 'template';
+
+        // check将检查菜单配置（『参数配置-自定义菜单』一节描述）中是否该菜单id，如果没有，则忽略下面的代码。
+        if (!check(menuId)) {
+            return;
+        }
+
+        // this 指向 editor 对象自身
+        var editor = this;
+        var templates = [
+            '<div class="zajindan" id="zajindan">'
+            		+'<img src="/images/egg0.png" style="width: 100%;" />'
+					+'<img src="/images/egg6.png" class="jindan"/>'
+					+'<img src="/images/egg8.png" class="jinguang"/>'
+					
+					+'<img src="/images/zd_cion11.png" class="jinguang1"/>'
+					+'<img src="/images/zd_cion12.png" class="jinguang2"/>'
+					+'<img src="/images/zd_cion13.png" class="jinguang3"/>'
+					+'<img src="/images/zd_cion15.png" class="jinguang5"/>'
+
+					+'<img src="/images/egg5.png" class="hongbao"/>'	
+					+'<img src="/images/egg3.png" class="chuizi">'
+					+'<input type="text" placeholder="请输入手机号" id="phone">'
+					+'<img src="/images/egg7.png" onclick="za()" class="sub_btn" id="sub">'
+					+'<div class="zhushi"><p>注：本活动最终解释权归本店所有</p></div>'
+			+'</div>',
+        ];
+
+        editor.commandHooks.insertTemplate = function (value) {
+            var html = templates[value];
+            editor.commandHooks.insertHtml(html);
+        };
+        // 创建 menu 对象
+        var menu = new E.Menu({
+            editor: editor,  // 编辑器对象
+            id: menuId,  // 菜单id
+            title: '抽奖', // 菜单标题
+            commandName: 'insertTemplate', // 命令名称          
+        });
+
+        // 数据源
+        var data  = {
+            // 格式： 'value' : 'title'
+            '0' : '砸金蛋',
+        };
+
+        // 为menu创建droplist对象
+        var tpl = '<span>{#title}</span>';
+        menu.dropList = new E.DropList(editor, menu, {
+            data: data,  // 传入数据源
+            tpl: tpl  // 传入模板
+        });
+
+        // 增加到editor对象中
+        editor.menus[menuId] = menu;
+
+    });
+
+});
 
 // bgcolor 菜单
 _e(function (E, $) {
+
     E.createMenu(function (check) {
         var menuId = 'bgcolor';
         if (!check(menuId)) {
@@ -3909,12 +3980,12 @@ _e(function (E, $) {
         $.each(configColors, function (k, v) {
             $content.append(
                 [
-                '<a href="#" class="color-item"',
-                '    title="' + v + '" commandValue="' + k + '" ',
-                '    style="color: ' + k + '" ',
-                '><i class="wangeditor-menu-img-brush"></i></a>'
+                    '<a href="#" class="color-item"',
+                    '    title="' + v + '" commandValue="' + k + '" ',
+                    '    style="color: ' + k + '" ',
+                    '><i class="wangeditor-menu-img-brush"></i></a>'
                 ].join('')
-                );
+            );
         });
         $content.on('click', 'a[commandValue]', function (e) {
             // 执行命令
@@ -3933,7 +4004,10 @@ _e(function (E, $) {
                 editor.command(e, 'BackColor', commandValue);
             }
         });
-
+        menu.dropPanel = new E.DropPanel(editor, menu, {
+            $content: $content,
+            width: 125
+        });
 
         // 定义 update selected 事件
         menu.updateSelectedEvent = function () {
@@ -4203,239 +4277,7 @@ _e(function (E, $) {
     });
 
 });
-// quote 菜单
-_e(function (E, $) {
 
-    E.createMenu(function (check) {
-        var menuId = 'quote';
-        if (!check(menuId)) {
-            return;
-        }
-        var editor = this;
-        var lang = editor.config.lang;
-
-        // 创建 menu 对象
-        var menu = new E.Menu({
-            editor: editor,
-            id: menuId,
-            title: lang.quote,
-            commandName: 'formatBlock',
-            commandValue: 'blockquote'
-        });
-
-        // 定义click事件
-        menu.clickEvent = function (e) {
-            var rangeElem = editor.getRangeElem();
-            var $rangeElem;
-            if (!rangeElem) {
-                e.preventDefault();
-                return;
-            }
-            var currentQuote = editor.getSelfOrParentByName(rangeElem, 'blockquote');
-            var $quote;
-
-            if (currentQuote) {
-                // 说明当前在quote之内，不做任何处理
-                e.preventDefault();
-                return;
-            }
-            console.log(rangeElem);
-            rangeElem = editor.getLegalTags(rangeElem);
-            $rangeElem = $(rangeElem);
-            console.log($rangeElem);
-            // 无文字，则不允许执行引用
-            if (!$rangeElem.text()) {
-                return;
-            }
-
-
-            if (!rangeElem) {
-                // 执行默认命令
-                // IE8 下执行此处（不过，经测试代码无效，也不报错）
-                editor.command(e, 'formatBlock', 'blockquote');
-                return;
-            }
-
-            // 自定义command事件
-            function commandFn() {
-                $quote = $('<p>' + $rangeElem.text() + '</p>');
-                $rangeElem.after($quote).remove();
-                $quote.wrap('<blockquote>');
-            }
-
-            // 自定义 callback 事件
-            function callback() {
-                // callback中，设置range为quote
-                var editor = this;
-                if ($quote) {
-                    editor.restoreSelectionByElem($quote.get(0));
-                }
-            }
-
-            // 执行自定义命令
-            editor.customCommand(e, commandFn, callback);
-        };
-
-        // 定义选中状态下的click事件
-        menu.clickEventSelected = function (e) {
-            var rangeElem;
-            var quoteElem;
-            var $lastChild;
-
-            // 获取当前选区的elem，并试图往上找 quote 元素
-            rangeElem = editor.getRangeElem();
-            quoteElem = editor.getSelfOrParentByName(rangeElem, 'blockquote');
-            if (!quoteElem) {
-                // 没找到，则返回
-                e.preventDefault();
-                return;
-            }
-
-            // 自定义的command事件
-            function commandFn() {
-                var $quoteElem;
-                var $children;
-
-                $quoteElem = $(quoteElem);
-                $children = $quoteElem.children();
-                if ($children.length) {
-                    $children.each(function (k) {
-                        var $item = $(this);
-                        if ($item.get(0).nodeName === 'P') {
-                            $quoteElem.after($item);
-                        } else {
-                            $quoteElem.after('<p>' + $item.text() + '</p>');
-                        }
-                        $lastChild = $item;  // 记录最后一个子元素，用于callback中的range定位
-                    });
-                    $quoteElem.remove();
-                    return;
-                }
-            }
-
-            // 自定义的callback函数
-            function callback() {
-                // callback中，设置range为lastChild
-                var editor = this;
-                if ($lastChild) {
-                    editor.restoreSelectionByElem($lastChild.get(0));
-                }
-            }
-
-            // 执行自定义命令
-            editor.customCommand(e, commandFn, callback);
-        };
-
-        // 定义更新选中状态的事件
-        menu.updateSelectedEvent = function () {
-            var self = this; //菜单对象
-            var editor = self.editor;
-            var rangeElem;
-
-            rangeElem = editor.getRangeElem();
-            rangeElem = editor.getSelfOrParentByName(rangeElem, 'blockquote');
-
-            if (rangeElem) {
-                return true;
-            }
-
-            return false;
-        };
-
-        // 增加到editor对象中
-        editor.menus[menuId] = menu;
-
-        // --------------- 两次点击 enter 跳出引用 ---------------
-        editor.ready(function () {
-            var editor = this;
-            var $txt = editor.txt.$txt;
-            var isPrevEnter = false;  // 是不是刚刚在quote中按了 enter 键
-            $txt.on('keydown', function (e) {
-                if (e.keyCode !== 13) {
-                    // 不是 enter 键
-                    isPrevEnter = false;
-                    return;
-                }
-
-                var rangeElem = editor.getRangeElem();
-                rangeElem = editor.getSelfOrParentByName(rangeElem, 'blockquote');
-                if (!rangeElem) {
-                    // 选区不是 quote
-                    isPrevEnter = false;
-                    return;
-                }
-
-                if (!isPrevEnter) {
-                    // 最近没有在qote中按enter键
-                    isPrevEnter = true;
-                    return;
-                }
-
-                var currentRangeElem = editor.getRangeElem();
-                var $currentRangeElem = $(currentRangeElem);
-                if ($currentRangeElem.length) {
-                    $currentRangeElem.parent().after($currentRangeElem);
-                }
-
-                // 设置选区
-                editor.restoreSelectionByElem(currentRangeElem, 'start');
-
-                isPrevEnter = false;
-                // 阻止默认行文
-                e.preventDefault();
-
-            });
-        }); // editor.ready(
-
-        // --------------- 处理quote中无内容时不能删除的问题 ---------------
-        editor.ready(function () {
-            var editor = this;
-            var $txt = editor.txt.$txt;
-            var $rangeElem;
-
-            function commandFn() {
-                $rangeElem && $rangeElem.remove();
-            }
-            function callback() {
-                if (!$rangeElem) {
-                    return;
-                }
-                var $prev = $rangeElem.prev();
-                if ($prev.length) {
-                    // 有 prev 则定位到 prev 最后
-                    editor.restoreSelectionByElem($prev.get(0));
-                } else {
-                    // 无 prev 则初始化选区
-                    editor.initSelection();
-                }
-            }
-
-            $txt.on('keydown', function (e) {
-                if (e.keyCode !== 8) {
-                    // 不是 backspace 键
-                    return;
-                }
-
-                var rangeElem = editor.getRangeElem();
-                rangeElem = editor.getSelfOrParentByName(rangeElem, 'blockquote');
-                if (!rangeElem) {
-                    // 选区不是 quote
-                    return;
-                }
-                $rangeElem = $(rangeElem);
-
-                var text = $rangeElem.text();
-                if (text) {
-                    // quote 中还有内容
-                    return;
-                }
-                editor.customCommand(e, commandFn, callback);
-
-            }); // $txt.on
-        }); // editor.ready(
-    });
-
-});
 // 字体 菜单
 _e(function (E, $) {
 
@@ -8660,73 +8502,7 @@ _e(function (E, $) {
     });
 
 });
-// 行高 菜单插件
-_e(function (E, $) {
 
-    // 用 createMenu 方法创建菜单
-    E.createMenu(function (check) {
-
-        // 定义菜单id，不要和其他菜单id重复。编辑器自带的所有菜单id，可通过『参数配置-自定义菜单』一节查看
-        var menuId = 'template';
-
-        // check将检查菜单配置（『参数配置-自定义菜单』一节描述）中是否该菜单id，如果没有，则忽略下面的代码。
-        if (!check(menuId)) {
-            return;
-        }
-
-        // this 指向 editor 对象自身
-        var editor = this;
-        var templates = [
-        '<p>{{name}}</p>',
-        '<p>模板2</p>'
-
-
-
-
-
-
-
-
-
-
-        ];
-
-        editor.commandHooks.insertTemplate = function (value) {
-            var html = templates[value];
-            editor.commandHooks.insertHtml(html);
-        };
-        // 创建 menu 对象
-        var menu = new E.Menu({
-            editor: editor,  // 编辑器对象
-            id: menuId,  // 菜单id
-            title: '信息模板', // 菜单标题
-            commandName: 'insertTemplate', // 命令名称
-
-            // 正常状态和选中装下的dom对象，样式需要自定义
-            $domNormal: $('<a href="#" tabindex="-1"><i class="wangeditor-menu-img-arrows-v"></i></a>'),
-            $domSelected: $('<a href="#" tabindex="-1" class="selected"><i class="wangeditor-menu-img-arrows-v"></i></a>')
-        });
-
-        // 数据源
-        var data  = {
-            // 格式： 'value' : 'title'
-            '0' : '模板1',
-            '1' : '模板2'
-        };
-
-        // 为menu创建droplist对象
-        var tpl = '<span>{#title}</span>';
-        menu.dropList = new E.DropList(editor, menu, {
-            data: data,  // 传入数据源
-            tpl: tpl  // 传入模板
-        });
-
-        // 增加到editor对象中
-        editor.menus[menuId] = menu;
-
-    });
-
-});
 // 自定义上传
 _e(function (E, $) {
 

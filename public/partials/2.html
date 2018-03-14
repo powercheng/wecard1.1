@@ -1,0 +1,49 @@
+<div >
+	<div style="position: relative; height: 120px;">
+		<img ng-if="card.personImage.name != ''" ng-src="http://image.mymicrocard.com/{{card.personImage.value}}" style="width: 80px; height: 80px; margin: 20px 0px 20px 10%;border-radius: 50%; float: left;" >
+		<p ng-if="card.personName.name != ''" style="text-align: center;  margin: 0; padding-top: 30px; border-bottom: 2px solid;">
+			<span style="color: {{card.personName.color}}; font-size: 24px;">{{card.personName.name}}</span>&nbsp;
+			<span ng-if="card.personTitle.name != ''" style="color: {{card.personTitle.color}}; font-size: 14px;">{{card.personTitle.name}}</span>
+		</p>
+		
+		<p ng-if="card.personPhone.name != ''" style="text-align: center;">
+			<a href="tel: {{card.personPhone.name}}" style="text-decoration: none;">
+				<span style="color: #333; font-size: 18px;">{{card.personPhone.name}}&nbsp</span><img src="/images/phone.png" width="15px" height="15px" />
+			</a>
+		</p>
+	</div>
+
+	<div style="background-color: whitesmoke;position:relative;">
+		<p ng-if="card.companyName.name != ''" style="color: #d17148; font-size: 18px; padding: 6px 8px; margin: 0px;">
+			{{card.companyName.name}}
+		</p>
+		<ul style="	list-style-type: none; margin: 0; padding: 0; border: none;">
+			<li ng-if="card.companyPhone.name != ''" style="padding: 6px 8px;">
+				<a href="tel: {{card.companyPhone.name}}" style="color: #333;text-decoration: none;">
+					<img src="/images/phone.png" width="15px" height="15px" />
+					<span>{{card.companyPhone.name}}&nbsp</span>
+					
+				</a>
+			</li>
+			<li ng-if="card.companyAddress.name != ''" style="padding: 6px 8px;">
+				<a href="http://apis.map.qq.com/tools/poimarker?type=0&marker=coord:{{card.companyAddress.value}};title:{{card.companyName.name}};addr:{{card.companyAddress.name}}&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp" style="color: #333;
+	text-decoration: none;">
+					<img src="/images/map.png" width="15px" height="15px" />
+					<span>{{card.companyAddress.name}}&nbsp</span>
+				</a>
+			</li>
+			<li ng-if="card.wechat.name != ''" style="padding: 6px 8px">
+				<a onclick="show('codeBg2')" style="color: #333;text-decoration: none;">				
+					<img src="/images/wechat.png" width="15px" height="15px" />
+					<span>{{card.wechat.name}}&nbsp</span>
+				</a>
+			</li>
+			<li ng-if="card.QQ.name != ''" style="padding: 6px 8px">
+				<a onclick="show('codeBg1')" style="color: #333;text-decoration: none;">
+					<img src="/images/QQ.png" width="15px" height="15px" />
+					<span>{{card.QQ.name}}&nbsp</span>			
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

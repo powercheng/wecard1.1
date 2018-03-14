@@ -10,15 +10,14 @@
     <title>微名片制作</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="shortcut icon" href="./images/favicon.png">
     <link rel="stylesheet" href="/stylesheets/front.css">
     <link rel="stylesheet" type="text/css" href="/wangeditor/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/wangeditor/css/wangEditor.css">
     <style type="text/css">
         .editor-text {
-            height: 600px;
-            /*max-height: 500px;*/
+            height: 500px;
         }
         .wangEditor-container {
             width: 100%;
@@ -30,8 +29,7 @@
 </head>
 
 <body ng-app="myApp">
-
-    <div class="navbar navbar-default navbar-static-top" role="navigation" data-ng-controller="HomeCtrl">
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -40,28 +38,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">微名片</a>
+                <a class="navbar-brand" href="#/">微名片</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a ng-href="#/">主页</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li data-ng-hide="user"><a ng-href="#/login">登录</a></li>
-                    <li data-ng-show="user"><a ng-click="logout()">你好 {{user.username}} 退出</a></li>
+                    <li data-ng-hide="user"><a ng-href="#/login">登录{{error}}</a></li>
+                    <li data-ng-show="user"><a ng-click="logout()"> 你好 {{user.username}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp退出</a></li>
                 </ul>
-            </div><!--/.nav-collapse -->
+            </div>
         </div>
     </div>
-
+	<!-- /container -->
     <div ng-view="">
 
-    </div> <!-- /container -->
+    </div> 
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular-route.min.js"></script>
     <script src="/javascripts/ngStorage.js"></script>
     <script src="/javascripts/app.js"></script>
     
@@ -69,7 +67,6 @@
     <script src="/javascripts/qrcode.js"></script>
     <script src="/javascripts/qrcode_UTF8.js"></script>
     <script src="/javascripts/angular-qrcode.js"></script>
-    <!-- qrcode package -->
 
 
     <!-- wangeditor with qiniu sdk -->
@@ -77,7 +74,6 @@
     <script type="text/javascript" src="/wangeditor/js/plupload/plupload.full.min.js"></script>
     <script type="text/javascript" src="/wangeditor/js/plupload/i18n/zh_CN.js"></script>
     <script type="text/javascript" src="/wangeditor/js/qiniu.js"></script>
-    <!-- wangeditor with qiniu sdk -->  
 
 
 

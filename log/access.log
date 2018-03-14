@@ -112,3 +112,14 @@ POST /login 200 799 - 122.248 ms
 POST /login - - - - ms
 POST /login - - - - ms
 POST /login 200 799 - 143.824 ms
+::1 - - [14/Mar/2018:12:30:26 +0000] "POST /login HTTP/1.1" 200 589 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+::1 - - [14/Mar/2018:12:31:29 +0000] "GET /user HTTP/1.1" 304 - "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+::1 - - [14/Mar/2018:12:31:41 +0000] "POST /login HTTP/1.1" 200 589 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+::1 - - [14/Mar/2018:12:31:43 +0000] "GET /card/1 HTTP/1.1" 304 - "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+::1 - - [14/Mar/2018:12:31:43 +0000] "GET /partials/.html HTTP/1.1" 404 153 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+::1 - - [14/Mar/2018:12:31:43 +0000] "GET /uptoken HTTP/1.1" 200 140 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+::1 - - [14/Mar/2018:12:31:43 +0000] "GET /uptoken HTTP/1.1" 200 140 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+::1 - - [14/Mar/2018:12:31:43 +0000] "GET /uptoken HTTP/1.1" 200 140 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+::1 - - [14/Mar/2018:12:31:43 +0000] "GET /uptoken HTTP/1.1" 200 140 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+::1 - - [14/Mar/2018:12:32:26 +0000] "PUT /card/ HTTP/1.1" 200 23 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+::1 - PUT /card/ HTTP/1.1 200 23 - 38.018 ms

@@ -1,11 +1,6 @@
 .smallFont {
 	font-size: 12px;
-}
-
-
-input {
-	margin: 2px;
-	font-size: :;px;
+	padding: 6px 6px 60px 6px;
 }
 
 input[type=file] {
@@ -19,6 +14,8 @@ input[type=file] {
 }  
 
 .main {
+	position: relative;
+	width: 320px;
 	margin: 0px auto;
 	padding: 6px 6px 60px 6px;
 	border: none;
@@ -35,8 +32,6 @@ input[type=file] {
 
 
 .main p{
-	font-size: 1em;
-	line-height: 1.4;
 	margin: 6px 0px
 }
 
@@ -50,9 +45,6 @@ input[type=file] {
 	right: 8px;
 }
 
-h1, h2, h3{
-	margin: 10px 0;
-}
 
 
 /*所有的image，video都包裹在p里面，所以不需要*/
@@ -74,6 +66,8 @@ img, video{
 .menu ul {
 	display: flex;
 	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
 }
 
 .menu ul li {
@@ -104,7 +98,7 @@ img, video{
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 10;
+	z-index: 200;
 }
 
 
@@ -118,16 +112,16 @@ img, video{
 .codeBg {
     width: 100%;
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
-    z-index: 15;
+    z-index: 201;
  }
  
 .codeImg {
 	width: 100%;
 	background-color: #fff;
 	padding: 20px 0;
-	position: fixed;
+	position: absolute;
 	left: 0;
 	bottom: 0px;
 }
@@ -139,3 +133,162 @@ img, video{
 }
 
 /*menu 菜单css*/
+
+
+.zajindan {
+	position: relative;
+}
+
+.zajindan .jindan {
+	position: absolute; 
+	left: 5%; 
+	bottom: 50%; 
+	width:90%; 
+	height:50%; 
+	z-index: 101;
+}
+
+.zajindan .jindan1 {	
+	-webkit-animation: jindan1 0.05s  infinite ;
+	animation: jindan1 0.05s infinite ;
+	animation-direction: alternate;
+	-webkit-animation-direction: alternate;
+}
+@keyframes jindan1 {
+	0% { transform: rotate(5deg); }
+
+	100% { transform: rotate(0deg);}
+}
+@-webkit-keyframes jindan1 {
+   	0% { transform: rotate(5deg); }
+
+	100% { transform: rotate(0deg); }
+}
+
+.zajindan .jinguang {
+	position: absolute; 
+	left: 5%; 
+	bottom: 50%; 
+	width:90%; 
+	height:50%; 
+	z-index: 100;
+}
+
+.zajindan .jinguang1 {
+	position: absolute;
+	left: 30%;
+	bottom: 70%;
+	width: 40%;
+	height: 30%;
+	z-index: 101;
+	display: none;
+}
+
+.zajindan .jinguang2 {
+	position: absolute;
+	left: 30%;
+	bottom: 70%;
+	width: 40%;
+	height: 30%;
+	z-index: 101;
+	display: none;
+}
+
+.zajindan .jinguang3 {
+	position: absolute;
+	left: 40%;
+	bottom: 75%;
+	width: 20%;
+	z-index: 101;
+	display: none;
+}
+
+.zajindan .jinguang5 {
+	position: absolute;
+	left: 30%;
+	bottom: 70%;
+	width: 40%;
+	height: 30%;
+	z-index: 101;
+	display: none;
+}
+
+.zajindan .hongbao {
+	position: absolute;
+	left: 5%; 
+	bottom: 10%; 
+	width:90%; 
+	height:65%; 
+	z-index: 100;
+}
+
+.zajindan .chuizi {
+	position: absolute;
+	left: 10%;
+	top: 5%;
+	width: 35%;
+	z-index: 102;
+	-webkit-animation: chuizi 1s cubic-bezier(0.34, -0.1, 0.32, 1.01) infinite alternate;
+	animation: chuizi 1s cubic-bezier(0.34, -0.1, 0.32, 1.01) infinite alternate;
+	transform-origin: bottom left;
+	-webkit-transform-origin: bottom left;
+}
+
+.zajindan input {
+	position: absolute;
+	left: 15%;
+	top: 56%;
+	width: 70%; 
+	height: 9%; 
+	border-radius: 10px;
+	z-index: 101;
+}
+
+.zajindan .tongzhi {
+	position: absolute;
+	left: 10%;
+	top: 52%;
+	width: 80%; 
+	font-size: 18px;
+	z-index: 101;
+}
+
+.zajindan .sub_btn {
+	position: absolute;
+	left: 15%;
+	top: 72%;
+	width: 70%; 
+	height: 9%; 
+	border-radius: 10px;
+	z-index: 101;
+}
+
+.zajindan .zhushi {
+	position: absolute;
+	top: 90%;
+	left: 5%;
+	width: 90%;
+	text-align: center;
+	font-size: 12px;
+}
+
+
+@keyframes chuizi
+{
+	0% {
+		transform: rotate(-15deg);		
+	}
+	100% {
+		transform: rotate(15deg);
+	}
+}
+@-webkit-keyframes chuizi
+{
+   0% {
+		transform: rotate(-15deg);
+		
+	}
+	100% {
+		transform: rotate(15deg);
+	}
+}

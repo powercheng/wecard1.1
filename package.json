@@ -18,7 +18,7 @@
     "express-jwt": "0.2.1",
     "express-session": "*",
     "express-validator": "*",
-    "jsonwebtoken": "0.4.0",
+    "jsonwebtoken": "8.2.0",
     "mongodb": "*",
     "mongoose": "*",
     "mongoose-sequence": "*",

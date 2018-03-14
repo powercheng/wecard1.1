@@ -3,11 +3,12 @@
 body {
 	display: block;
 	min-width: 320px;
-    max-width: 750px;
+    max-width: 414px;
     margin: 0px auto;
 }
 
 .main {
+	position: relative;
 	width: 414px
 	margin: 0px auto;
 	padding: 6px 6px 60px 6px;
@@ -25,8 +26,6 @@ body {
 
 
 .main p{
-	font-size: 1em;
-	line-height: 1.4;
 	margin: 6px 0px
 }
 
@@ -40,77 +39,13 @@ body {
 	right: 8px;
 }
 
-.template h1, h2, h3{
-	margin: 10px 0;
-}
-
-.template a {
-	color: #333;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.template a:hover, a:link, a:visited{
-	text-decoration: none;
-}
-
-.template ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	border: none;
-}
-
-.template .text {
-	background-color: white;
-	margin: 0px;
-}
-
-.template .mutexTab {
-	display: flex;
-	margin: 0px;
-}
-
-.template .mutexTab .mutex {
-	padding: 10px 0px;
-	flex: 1;
-	text-align: center;
-	font-size: 14px;
-}
-
-
-.template .mutexTab .mused {
-	background-color: #F8F8F8;
-}
-
-.template .mutexTab .mused a {
-	font-weight: 700;
-}
-
-.template .text ul li {
-	padding: 8px;
-	border-bottom: 1px solid #dedede;
-}
-
-.template .title {
-	width: 80px;
-	position: absolute;
-	color: #aaa;
-}
-
-.template .content {
-	padding-left: 80px;
-	word-wrap: break-word;
-}
-
-
-
 /*所有的image，video都包裹在p里面，所以不需要*/
 img, video{
 	margin: 0;
 	padding: 0;
 	border: none;
 }
+
 
 /*menu 菜单css*/
 .menu {
@@ -119,13 +54,14 @@ img, video{
 	position: fixed;
 	left: 0;
 	bottom: 0;
+	z-index: 199;
 }
 
 .menu ul {
-	margin: 0px;
-	padding: 0px;
 	display: flex;
 	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
 }
 
 .menu ul li {
@@ -148,9 +84,7 @@ img, video{
 	color: #fff;
 }
 
-/*二维码背景*/
-
-.layBg {
+.menu .layBg {
 	width: 100%;
 	height: 100%;
 	opacity: 0.5;
@@ -158,35 +92,199 @@ img, video{
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 10;
+	z-index: 200;
 }
 
-.close {
+
+.menu .close {
 	position: absolute;
     top: 6px;
     right: 10px;
     cursor: pointer;
 }
 
-.codeBg {
+.menu .codeBg {
     width: 100%;
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
-    z-index: 15;
+    z-index: 201;
  }
  
-.codeImg {
+.menu .codeImg {
 	width: 100%;
 	background-color: #fff;
 	padding: 20px 0;
-	position: fixed;
+	position: absolute;
 	left: 0;
 	bottom: 0px;
 }
-.codeText {
+.menu .codeText {
 	text-align: center;
 	font-size: 12px;
 	color: #aaa;
 	line-height: 30px;
+}
+
+/*menu 菜单css*/
+
+
+
+.zajindan {
+	position: relative;
+}
+
+.zajindan .jindan {
+	position: absolute; 
+	left: 5%; 
+	bottom: 50%; 
+	width:90%; 
+	height:50%; 
+	z-index: 101;
+}
+
+.zajindan .jindan1 {	
+	-webkit-animation: jindan1 0.05s  infinite ;
+	animation: jindan1 0.05s infinite ;
+	animation-direction: alternate;
+	-webkit-animation-direction: alternate;
+}
+@keyframes jindan1 {
+	0% { transform: rotate(5deg); }
+
+	100% { transform: rotate(0deg);}
+}
+@-webkit-keyframes jindan1 {
+   	0% { transform: rotate(5deg); }
+
+	100% { transform: rotate(0deg); }
+}
+
+.zajindan .jinguang {
+	position: absolute; 
+	left: 5%; 
+	bottom: 50%; 
+	width:90%; 
+	height:50%; 
+	z-index: 100;
+}
+
+.zajindan .jinguang1 {
+	position: absolute;
+	left: 30%;
+	bottom: 70%;
+	width: 40%;
+	height: 30%;
+	z-index: 101;
+	display: none;
+}
+
+.zajindan .jinguang2 {
+	position: absolute;
+	left: 30%;
+	bottom: 70%;
+	width: 40%;
+	height: 30%;
+	z-index: 101;
+	display: none;
+}
+
+.zajindan .jinguang3 {
+	position: absolute;
+	left: 40%;
+	bottom: 75%;
+	width: 20%;
+	z-index: 101;
+	display: none;
+}
+
+.zajindan .jinguang5 {
+	position: absolute;
+	left: 30%;
+	bottom: 70%;
+	width: 40%;
+	height: 30%;
+	z-index: 101;
+	display: none;
+}
+
+.zajindan .hongbao {
+	position: absolute;
+	left: 5%; 
+	bottom: 10%; 
+	width:90%; 
+	height:65%; 
+	z-index: 100;
+}
+
+.zajindan .chuizi {
+	position: absolute;
+	left: 10%;
+	top: 5%;
+	width: 35%;
+	z-index: 102;
+	-webkit-animation: chuizi 1s cubic-bezier(0.34, -0.1, 0.32, 1.01) infinite alternate;
+	animation: chuizi 1s cubic-bezier(0.34, -0.1, 0.32, 1.01) infinite alternate;
+	transform-origin: bottom left;
+	-webkit-transform-origin: bottom left;
+}
+
+.zajindan input {
+	position: absolute;
+	font-size: 18px;
+	left: 15%;
+	top: 56%;
+	width: 70%; 
+	height: 9%; 
+	border-radius: 10px;
+	z-index: 101;
+}
+
+.zajindan .tongzhi {
+	position: absolute;
+	left: 10%;
+	top: 52%;
+	width: 80%; 
+	font-size: 18px;
+	z-index: 101;
+}
+
+.zajindan .sub_btn {
+	position: absolute;
+	left: 15%;
+	top: 72%;
+	width: 70%; 
+	height: 9%; 
+	border-radius: 10px;
+	z-index: 101;
+}
+
+.zajindan .zhushi {
+	position: absolute;
+	top: 90%;
+	left: 5%;
+	width: 90%;
+	text-align: center;
+	font-size: 12px;
+}
+
+
+@keyframes chuizi
+{
+	0% {
+		transform: rotate(-15deg);		
+	}
+	100% {
+		transform: rotate(15deg);
+	}
+}
+@-webkit-keyframes chuizi
+{
+   0% {
+		transform: rotate(-15deg);
+		
+	}
+	100% {
+		transform: rotate(15deg);
+	}
 }
