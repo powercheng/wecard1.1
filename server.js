@@ -12,7 +12,7 @@ var port = process.env.PORT || 80;
 
 var User = require('./models/user');
 var Card = require('./models/card');
-var Lottery = require('./models/Lottery');
+var Lottery = require('./models/lottery');
 // mongo 
 var mongo = require('mongodb');
 var mongoose = require('mongoose');

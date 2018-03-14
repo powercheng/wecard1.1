@@ -288,6 +288,9 @@ angular.module('myApp', [
 
 		$scope.saveCard = function() {
 			$scope.saveStatus = "保存中...";
+			if ($scope.lottos[0].value != ""){
+				$scope.saveLotto();
+			}
 			$http({
 				method: "PUT",
 				url: "/card/",
