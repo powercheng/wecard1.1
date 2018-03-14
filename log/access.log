@@ -261,3 +261,4 @@ POST /login 200 799 - 143.824 ms
 ::1 - POST /delete/files HTTP/1.1 400 53 - 419.492 ms
 ::1 - GET /lottery?phone=18163184708&path=9%2F1 HTTP/1.1 200 146 - 12.348 ms
 ::1 - GET /lottery?phone=18163184701&path=9%2F1 HTTP/1.1 200 146 - 52.385 ms
+::1 token POST /signup HTTP/1.1 200 26 - 160.578 ms
