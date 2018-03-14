@@ -72,6 +72,7 @@ img, video{
 	padding: 6px 0;
 	display: block;
 	text-align: center;
+	text-decoration: none;
 }
 
 .menu ul li a span {
