@@ -1,4 +1,5 @@
 function show(str) {
+	console.log(1);
 	document.getElementById("layBg").style.display = "block";
 	document.getElementById(str).style.display = "block";
 }
@@ -7,13 +8,6 @@ function closeIt(str) {
 	document.getElementById("layBg").style.display = "none";
 	document.getElementById(str).style.display = "none";
 }
-
-changeMut = function(i) {
-	$(".mutex").removeClass("mused");
-	$(".mutex").eq(i).addClass("mused");
-	$(".mutexItem").css("display", "none");
-	$(".mutexItem").eq(i).css("display", "block");
-};
 
 function music() {
 	var audio = document.getElementById("musicId");

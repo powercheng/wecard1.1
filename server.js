@@ -140,21 +140,6 @@ app.post('/signup', function(req, res) {
 	});
 });
 
-/*app.get('/token', parseToken, function(req, res) {
-	jwt.verify(req.token, process.env.JWT_SECRET, function(err, decoded) {
-		if (err) {
-			res.status(200).json({
-				type: false,
-				message: err.message
-			});
-		} else {
-			res.status(200).json({
-				type: true,
-				data: decoded
-			});
-		}
-	});	
-});*/
 
 /*获取user信息*/
 app.get('/user', parseToken, function(req, res) {
@@ -442,17 +427,7 @@ app.post('/lottery', parseToken, function(req, res) {
 		}
 	});
 });
-/*	Lottery.findOne({
-		path: req.body.path
-	}, function(err, lottery) {
-		if (err || !lottery) {
-			res.status(400).json({
-				message: "错误请求"
-			});
-		} else {
-			
-		}
-	}*/
+
 
 app.post('/finish', parseToken, function(req, res, next) {
 	jwt.verify(req.token, process.env.JWT_SECRET, function(err, decoded) {
