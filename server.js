@@ -17,7 +17,7 @@ var Lottery = require('./models/lottery');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-var db = mongoose.connect('mongodb://root:1215225624@127.0.0.1:27017/card?authSource=admin', {
+var db = mongoose.connect(process.env.mongodb, {
 	useMongoClient: true
 });
 
