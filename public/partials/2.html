@@ -9,7 +9,7 @@
 		<p ng-if="card.personPhone.name != ''" style="text-align: center;">
 			<a href="tel: {{card.personPhone.name}}" style="text-decoration: none;">
 				<span style="color: #333; font-size: 18px;">{{card.personPhone.name}}&nbsp</span>
-				<img src="/images/phone.png" width="15px" height="15px" />
+				<img src="http://image.mymicrocard.com/images/phone.png" width="15px" height="15px" />
 			</a>
 		</p>
 	</div>
@@ -21,26 +21,26 @@
 		<ul style="	list-style-type: none; margin: 0; padding: 0; border: none;">
 			<li ng-if="card.companyPhone.name != ''" style="padding: 6px 8px;">
 				<a href="tel: {{card.companyPhone.name}}" style="color: #333;text-decoration: none;">
-					<img src="/images/phone.png" width="15px" height="15px" />
+					<img src="http://image.mymicrocard.com/images/phone.png" width="15px" height="15px" />
 					<span>{{card.companyPhone.name}}&nbsp</span>					
 				</a>
 			</li>
 			<li ng-if="card.companyAddress.name != ''" style="padding: 6px 8px;">
 				<a href="http://apis.map.qq.com/tools/poimarker?type=0&marker=coord:{{card.companyAddress.value}};title:{{card.companyName.name}};addr:{{card.companyAddress.name}}&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp" style="color: #333;
 	text-decoration: none;">
-					<img src="/images/map.png" width="15px" height="15px" />
+					<img src="http://image.mymicrocard.com/images/map.png" width="15px" height="15px" />
 					<span>{{card.companyAddress.name}}&nbsp</span>
 				</a>
 			</li>
 			<li ng-if="card.wechat.name != ''" style="padding: 6px 8px">
 				<a href="javascript:void(0)" onclick="show('codeBg2')" style="color: #333;text-decoration: none;">				
-					<img src="/images/wechat.png" width="15px" height="15px" />
+					<img src="http://image.mymicrocard.com/images/wechat.png" width="15px" height="15px" />
 					<span>{{card.wechat.name}}&nbsp</span>
 				</a>
 			</li>
 			<li ng-if="card.QQ.name != ''" style="padding: 6px 8px">
 				<a href="javascript:void(0)" onclick="show('codeBg1')" style="color: #333;text-decoration: none;">
-					<img src="/images/QQ.png" width="15px" height="15px" />
+					<img src="http://image.mymicrocard.com/images/QQ.png" width="15px" height="15px" />
 					<span>{{card.QQ.name}}&nbsp</span>			
 				</a>
 			</li>

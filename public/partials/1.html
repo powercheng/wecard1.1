@@ -15,7 +15,7 @@
 	<p ng-if="card.personPhone.name != ''" style="text-align: center;">
 		<a href="tel: {{card.personPhone.name}}" style="color: #333;text-decoration: none;">
 			<span style="color: {{card.personPhone.color}}; font-size: 18px">{{card.personPhone.name}}&nbsp</span>
-			<img src="/images/phone.png" width="15px" height="15px" />
+			<img src="http://image.mymicrocard.com/images/phone.png" width="15px" height="15px" />
 		</a>
 	</p>
 
@@ -25,7 +25,7 @@
 				<span style="width: 80px; position: absolute; color: #aaa;">座机电话</span>
 				<a href="tel: {{card.companyPhone.name}}" style="color: #333;text-decoration: none;">
 					<span style="padding-left: 80px;">{{card.companyPhone.name}}&nbsp</span>
-					<img src="/images/phone.png" width="15px" height="15px" />
+					<img src="http://image.mymicrocard.com/images/phone.png" width="15px" height="15px" />
 				</a>
 			</li>
 			<li ng-if="card.companyAddress.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede">
@@ -33,21 +33,21 @@
 				<a href="http://apis.map.qq.com/tools/poimarker?type=0&marker=coord:{{card.companyAddress.value}};title:{{card.companyName.name}};addr:{{card.companyAddress.name}}&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp" style="color: #333;
 	text-decoration: none;">
 					<span style="padding-left: 80px;">{{card.companyAddress.name}}&nbsp</span>
-					<img src="/images/map.png" width="15px" height="15px" />
+					<img src="http://image.mymicrocard.com/images/map.png" width="15px" height="15px" />
 				</a>
 			</li>
 			<li ng-if="card.wechat.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede">
 				<span style="width: 80px; position: absolute; color: #aaa;">微信号码</span>
 				<a href="javascript:void(0)" onclick="show('codeBg2')" style="color: #333; text-decoration: none;">
 					<span style="padding-left: 80px;">{{card.wechat.name}}&nbsp</span>
-					<img src="/images/wechat.png" width="15px" height="15px" />
+					<img src="http://image.mymicrocard.com/images/wechat.png" width="15px" height="15px" />
 				</a>
 			</li>
 			<li ng-if="card.QQ.name != ''" style="padding: 8px; border-bottom: 1px solid #dedede">
 				<span style="width: 80px; position: absolute; color: #aaa;">QQ号码</span>
 				<a href="javascript:void(0)"  onclick="show('codeBg1')" style="color: #333;text-decoration: none;">
 					<span style="padding-left: 80px;">{{card.QQ.name}}&nbsp</span>
-					<img src="/images/QQ.png" width="15px" height="15px" />
+					<img src="http://image.mymicrocard.com/images/QQ.png" width="15px" height="15px" />
 				</a>
 			</li>
 		</ul>

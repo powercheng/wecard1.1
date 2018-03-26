@@ -3895,19 +3895,19 @@ _e(function (E, $) {
         var editor = this;
         var templates = [
             '<div class="zajindan" id="zajindan">'
-            		+'<img src="/images/egg0.png" style="width: 100%;" />'
-					+'<img src="/images/egg6.png" class="jindan"/>'
-					+'<img src="/images/egg8.png" class="jinguang"/>'
+            		+'<img src="http://image.mymicrocard.com/images/egg0.png" style="width: 100%;" />'
+					+'<img src="http://image.mymicrocard.com/images/egg6.png" class="jindan"/>'
+					+'<img src="http://image.mymicrocard.com/images/egg8.png" class="jinguang"/>'
 					
-					+'<img src="/images/zd_cion11.png" class="jinguang1"/>'
-					+'<img src="/images/zd_cion12.png" class="jinguang2"/>'
-					+'<img src="/images/zd_cion13.png" class="jinguang3"/>'
-					+'<img src="/images/zd_cion15.png" class="jinguang5"/>'
+					+'<img src="http://image.mymicrocard.com/images/zd_cion11.png" class="jinguang1"/>'
+					+'<img src="http://image.mymicrocard.com/images/zd_cion12.png" class="jinguang2"/>'
+					+'<img src="http://image.mymicrocard.com/images/zd_cion13.png" class="jinguang3"/>'
+					+'<img src="http://image.mymicrocard.com/images/zd_cion15.png" class="jinguang5"/>'
 
-					+'<img src="/images/egg5.png" class="hongbao"/>'	
-					+'<img src="/images/egg3.png" class="chuizi">'
+					+'<img src="http://image.mymicrocard.com/images/egg5.png" class="hongbao"/>'	
+					+'<img src="http://image.mymicrocard.com/images/egg3.png" class="chuizi">'
 					+'<input type="text" placeholder="请输入手机号" id="phone">'
-					+'<img src="/images/egg7.png" onclick="za()" class="sub_btn" id="sub">'
+					+'<img src="http://image.mymicrocard.com/images/egg7.png" onclick="za()" class="sub_btn" id="sub">'
 					+'<div class="zhushi"><p>注：本活动最终解释权归本店所有</p></div>'
 			+'</div>',
         ];
