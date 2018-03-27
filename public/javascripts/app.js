@@ -1,325 +1,328 @@
 'use strict';
 
 angular.module('myApp', [
-		'ngRoute',
-		'ngStorage',
-		'monospaced.qrcode'
+	'ngRoute',
+	'ngStorage',
+	'monospaced.qrcode'
 	])
-	.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
 
-		$routeProvider.
-		when('/', {
-			templateUrl: 'partials/cards.html',
-			controller: 'cardsCtrl'
-		}).
-		when('/login', {
-			templateUrl: 'partials/login.html',
-			controller: 'loginCtrl'
-		}).
-		when('/cards/:ownerID/:cardName', {
-			templateUrl: 'partials/card.html',
-			controller: 'cardCtrl'
-		}).
-		when('/cards', {
-			templateUrl: 'partials/cards.html',
-			controller: 'cardsCtrl'
+	$routeProvider.
+	when('/', {
+		templateUrl: 'partials/cards.html',
+		controller: 'cardsCtrl'
+	}).
+	when('/login', {
+		templateUrl: 'partials/login.html',
+		controller: 'loginCtrl'
+	}).
+	when('/cards/:ownerID/:cardName', {
+		templateUrl: 'partials/card.html',
+		controller: 'cardCtrl'
+	}).
+	when('/cards', {
+		templateUrl: 'partials/cards.html',
+		controller: 'cardsCtrl'
+	});
+
+	$httpProvider.interceptors.push(['$q', '$location', '$sessionStorage', function($q, $location, $sessionStorage) {
+		return {
+			'request': function(config) {
+				config.headers = config.headers || {};
+				if($sessionStorage.token) {
+					config.headers.Authorization = 'token ' + $sessionStorage.token;
+				}
+				return config;
+			},
+			'responseError': function(response) {
+				if(response.status === 401 || response.status === 403) {
+					$location.path('/signin');
+				}
+				return $q.reject(response);
+			}
+		};
+	}]);
+}])
+
+.controller('loginCtrl', ['$rootScope', '$scope', '$location', '$http', '$sessionStorage', 'Main', function($rootScope, $scope, $location, $http, $sessionStorage, Main) {
+	$scope.login = function() {
+		var formData = {
+			username: $scope.username,
+			password: $scope.password
+		}
+
+		Main.login(formData, function(res) {
+			$rootScope.user = res.user;
+			$rootScope.start = 0;
+			$rootScope.pages = new Array(Math.ceil(res.user.cards.length/15));
+			$sessionStorage.token = res.token;
+			$location.path('/cards');
+		}, function(res) {
+			$scope.loginError = res.message;
+		})
+	}
+
+	$rootScope.logout = function() {
+		Main.logout(function() {
+			$location.path('/login');
+		}, function() {
+			$rootScope.error = 'Failed to logout';
 		});
+	}
+}])
 
-		$httpProvider.interceptors.push(['$q', '$location', '$sessionStorage', function($q, $location, $sessionStorage) {
-			return {
-				'request': function(config) {
-					config.headers = config.headers || {};
-					if($sessionStorage.token) {
-						config.headers.Authorization = 'token ' + $sessionStorage.token;
-					}
-					return config;
-				},
-				'responseError': function(response) {
-					if(response.status === 401 || response.status === 403) {
-						$location.path('/signin');
-					}
-					return $q.reject(response);
-				}
-			};
-		}]);
-	}])
-
-	.controller('loginCtrl', ['$rootScope', '$scope', '$location', '$http', '$sessionStorage', 'Main', function($rootScope, $scope, $location, $http, $sessionStorage, Main) {
-		$scope.login = function() {
-			var formData = {
-				username: $scope.username,
-				password: $scope.password
-			}
-
-			Main.login(formData, function(res) {
+.controller('cardsCtrl', ['$rootScope', '$scope', '$http', 'Main', '$sessionStorage', '$location', function($rootScope, $scope, $http, Main, $sessionStorage, $location) {
+	if(!$sessionStorage.token) {
+		$location.path('/login');
+		return
+	}
+	if($rootScope.user === undefined) {
+		Main.getUser(
+			function(res) {
 				$rootScope.user = res.user;
 				$rootScope.start = 0;
 				$rootScope.pages = new Array(Math.ceil(res.user.cards.length/15));
-				$sessionStorage.token = res.token;
-				$location.path('/cards');
-			}, function(res) {
-				$scope.loginError = res.message;
-			})
-		}
-
-		$rootScope.logout = function() {
-			Main.logout(function() {
-				$location.path('/login');
-			}, function() {
-				$rootScope.error = 'Failed to logout';
-			});
-		}
-	}])
-
-	.controller('cardsCtrl', ['$rootScope', '$scope', '$http', 'Main', '$sessionStorage', '$location', function($rootScope, $scope, $http, Main, $sessionStorage, $location) {
-		if(!$sessionStorage.token) {
-			$location.path('/login');
-			return
-		}
-		if($rootScope.user === undefined) {
-			Main.getUser(
-				function(res) {
-					$rootScope.user = res.user;
-					$rootScope.start = 0;
-					$rootScope.pages = new Array(Math.ceil(res.user.cards.length/15));
-					$rootScope.logout = function() {
-						Main.logout(
-							function() {
-								$location.path('/login');
-							},
-							function() {
-								$rootScope.error = 'Failed to logout';
-							});
-					}
-				},
-				function() {
-					$rootScope.error = '登录失败';
-					$location.path('/login');
-					return
-				}
-			);
-		}
-
-		$scope.createCard = function() {
-			var card = {};
-			card.cardPath = $rootScope.user.id + '/' + $scope.cardName;
-			var cards = $rootScope.user.cards;
-			for (var i=0; i < cards.length; i++) {
-				if (card.cardPath == cards[i]) {
-					$scope.createStatus = "已存在该文件名";
-					return
-				}
-			}
-			card.template = "1";
-			card.companyName = {
-				name: '云梦敏捷图文广告',
-			};
-			card.companyAddress = {
-				name: '云梦县鑫光公寓西北100米(梦泽大道西)',
-				value: '31.031310,113.745570'
-			};
-			card.companyPhone = {
-				name: "0712-4222110"
-			};
-			card.personName = {
-				name: '黄敏'
-			};
-			card.personTitle = {
-				name: '总经理'
-			};
-			card.personPhone = {
-				name: "15272838562"
-			};
-			card.personImage = {
-				name: "头像",
-				value: "0/personImage.jpg"
-			};
-			card.wechat = {
-				name: "15272838562",
-				code: "0/wechat.jpg"
-			};
-			card.QQ = {
-				name: "3367876415",
-				code: "0/QQ.jpg"
-			};
-			card.other = [{
-				name: "",
-				value: ""
-			}];
-			card.bgColor = "#ff7694";
-			card.menuColor = "#ff7694";
-			card.topHtml = "";
-			card.botHtml = "";
-			card.music = "";
-			Main.card(angular.toJson(card), function(res) {
-				$rootScope.user = res.user;
-				$rootScope.pages = new Array(Math.ceil(res.user.cards.length/15));
-			}, function() {
-				$rootScope.error = 'Failed to fetch details';
-			})
-		}
-		$scope.deleteCard = function(cardPath) {
-			var msg = "您真的确定要删除吗？\n\n请确认！";
-			if(confirm(msg) == true) {
-				$http.delete('/card', {
-						params: {
-							cardPath: cardPath
-						}
-					})
-					.then(function(res) {
-						$rootScope.user = res.data.user;
-						if ($rootScope.start >=  res.data.user.cards.length && $rootScope.start != 0) {
-							$rootScope.start -= 15;
-						} 
-						$rootScope.pages = new Array(Math.ceil(res.data.user.cards.length/15));
-					}, function(res) {
-					});
-			} else {
-
-			}
-		}
-		$scope.nextPage = function() {
-			$rootScope.start += 15;
-			if ($rootScope.start >= $rootScope.user.cards.length) {
-				$rootScope.start -= 15;
-			}
-		}
-		$scope.previousPage = function() {
-			$rootScope.start -= 15;
-			if($rootScope.start < 0) {
-				$rootScope.start = 0;
-			}
-		}
-		$scope.goPage = function(page) {
-			$rootScope.start = page * 15;
-		}
-	}])
-
-	.controller('cardCtrl', ['$rootScope', '$scope', '$http', '$routeParams', '$sce', '$timeout', '$sessionStorage', '$location', 'Main', function($rootScope, $scope, $http, $routeParams, $sce, $timeout, $sessionStorage, $location, Main) {
-		if(!$sessionStorage.token) {
-			$location.path('/login');
-			return
-		}
-		if($rootScope.user === undefined) {
-			Main.getUser(function(res) {
-				$rootScope.user = res.user;
-				$rootScope.start = 0;
 				$rootScope.logout = function() {
-					Main.logout(function() {
-						$location.path('/login');
-					}, function() {
-						$rootScope.error = 'Failed to logout';
-					});
-				};
-			}, function(res) {
-				$rootScope.error = res.message;
-				$location.path('/login');
-				return
-			});
-		}
-
-		$http({
-			method: 'GET',
-			url: '/card/' + $routeParams.cardName,
-		}).then(function(res) {
-			$scope.card = res.data.card;
-		}, function errorCallback(res) {});
-		$scope.saveStatus = "未保存";
-		$scope.toggle = function(index) {
-			$scope.myVar[index] = !$scope.myVar[index];
-		};
-
-		$scope.myVar = [true, false, true];
-		$scope.show = function(value) {
-			$scope.myVar[0] = true;
-			$scope.myVar[1] = true;
-			$scope.myVar[2] = true;
-			$scope.myVar[value] = false;
-		}
-
-		$scope.delText = function(value) {
-			if(value == 0) {
-				$scope.card.topHtml = "";
-			} else if(value == 1) {
-				$scope.card.botHtml = "";
-			}
-		}
-		
-		$scope.saveLotto = function() {
-			$http({
-				method: "POST",
-				url: "/lottery/",
-				data: {
-					path: $routeParams.cardName,
-					lottos: $scope.lottos,
-					lottoMark: $scope.lottoMark,
-					customers: []
-				},
-			}).then(function(res) {
-				$scope.lottoStatus = res.data.message;
-			}, function(res) {
-				$rootScope.error = res.data.message;
-				$location.path('/login');
-				return
-			});
-		}
-		$scope.lottos = [{name: "一等奖", value: "", percent:""},{name: "二等奖", value: "", percent:""},{name:"三等奖",value:"",percent:""}];
-		$scope.lottoMark = "请凭手机号到本店前台领取奖品，该奖品三日内有效";
-		$scope.addInfo = function(arr,index) {
-			console.log(index);
-			arr.splice(index, 0,{
-				name: "",
-				value: ""
-			});
-		};
-		$scope.pushInfo = function(arr) {
-			arr.push({
-				name: "",
-				value: ""
-			})
-		}
-		$scope.removeInfo = function(arr, index) {
-			arr.splice(index, 1);
-		};
-
-		$scope.trustUrl = function(url) {
-			return $sce.trustAsResourceUrl('http://image.mymicrocard.com/' + url);
-		};
-
-		$scope.saveCard = function() {
-			$scope.saveStatus = "保存中...";
-			if ($scope.lottos[0].value != ""){
-				$scope.saveLotto();
-			}
-			$http({
-				method: "PUT",
-				url: "/card/",
-				data: $scope.card,
-			}).then(function(res) {
-				$scope.saveStatus = "保存成功";
-				$timeout(function() {
-					$scope.saveStatus = "未保存";
-				}, 30000);
-			}, function(res) {
-				$rootScope.error = res.message;
-				$location.path('/login');
-				return
-			});
-		};
-
-		$scope.finishCard = function() {
-			$scope.saveCard();
-			var images = $("img");
-			var upImages = new Array();
-			var dom = "image.mymicrocard.com";
-			for(var i = 0; i < images.length; i++) {
-				if(images[i].currentSrc.indexOf(dom) >= 0 && upImages.indexOf(images[i].currentSrc) === -1) {
-					upImages.push(images[i].currentSrc);
+					Main.logout(
+						function() {
+							$location.path('/login');
+						},
+						function() {
+							$rootScope.error = 'Failed to logout';
+						});
 				}
+			},
+			function() {
+				$rootScope.error = '登录失败';
+				$location.path('/login');
+				return
 			}
-			for(var i = 0; i < upImages.length; i++) {
-				upImages[i] = upImages[i].split('/').pop();
+			);
+	}
+
+	$scope.createCard = function() {
+		var card = {};
+		card.cardPath = $rootScope.user.id + '/' + $scope.cardName;
+		var cards = $rootScope.user.cards;
+		for (var i=0; i < cards.length; i++) {
+			if (card.cardPath == cards[i]) {
+				$scope.createStatus = "已存在该文件名";
+				return
 			}
+		}
+		card.template = "1";
+		card.companyName = {
+			name: '云梦敏捷图文广告',
+		};
+		card.companyAddress = {
+			name: '云梦县鑫光公寓西北100米(梦泽大道西)',
+			value: '31.031310,113.745570'
+		};
+		card.companyPhone = {
+			name: "0712-4222110"
+		};
+		card.personName = {
+			name: '黄敏'
+		};
+		card.personTitle = {
+			name: '总经理'
+		};
+		card.personPhone = {
+			name: "15272838562"
+		};
+		card.personImage = {
+			name: "头像",
+			value: "images/personImage.jpg"
+		};
+		card.wechat = {
+			name: "15272838562",
+			code: "images/wechat.jpg"
+		};
+		card.QQ = {
+			name: "3367876415",
+			code: "images/QQ.jpg"
+		};
+		card.other = [{
+			name: "",
+			value: ""
+		}];
+		card.redirect = "1";
+		card.bgColor = "#ff7694";
+		card.menuColor = "#ff7694";
+		card.topHtml = "";
+		card.botHtml = "";
+		card.music = "";
+		Main.card(angular.toJson(card), function(res) {
+			$rootScope.user = res.user;
+			$rootScope.pages = new Array(Math.ceil(res.user.cards.length/15));
+		}, function() {
+			$rootScope.error = 'Failed to fetch details';
+		})
+	}
+	$scope.deleteCard = function(cardPath) {
+		var msg = "您真的确定要删除吗？\n\n请确认！";
+		if(confirm(msg) == true) {
+			$http.delete('/card', {
+				params: {
+					cardPath: cardPath
+				}
+			})
+			.then(function(res) {
+				$rootScope.user = res.data.user;
+				if ($rootScope.start >=  res.data.user.cards.length && $rootScope.start != 0) {
+					$rootScope.start -= 15;
+				} 
+				$rootScope.pages = new Array(Math.ceil(res.data.user.cards.length/15));
+			}, function(res) {
+			});
+		} else {
+
+		}
+	}
+	$scope.nextPage = function() {
+		$rootScope.start += 15;
+		if ($rootScope.start >= $rootScope.user.cards.length) {
+			$rootScope.start -= 15;
+		}
+	}
+	$scope.previousPage = function() {
+		$rootScope.start -= 15;
+		if($rootScope.start < 0) {
+			$rootScope.start = 0;
+		}
+	}
+	$scope.goPage = function(page) {
+		$rootScope.start = page * 15;
+	}
+}])
+
+.controller('cardCtrl', ['$rootScope', '$scope', '$http', '$routeParams', '$sce', '$timeout', '$sessionStorage', '$location', 'Main', function($rootScope, $scope, $http, $routeParams, $sce, $timeout, $sessionStorage, $location, Main) {
+	if(!$sessionStorage.token) {
+		$location.path('/login');
+		return
+	}
+	if($rootScope.user === undefined) {
+		Main.getUser(function(res) {
+			$rootScope.user = res.user;
+			$rootScope.start = 0;
+			$rootScope.logout = function() {
+				Main.logout(function() {
+					$location.path('/login');
+				}, function() {
+					$rootScope.error = 'Failed to logout';
+				});
+			};
+		}, function(res) {
+			$rootScope.error = res.message;
+			$location.path('/login');
+			return
+		});
+	}
+
+	$http({
+		method: 'GET',
+		url: '/card/' + $routeParams.cardName,
+	}).then(function(res) {
+		$scope.card = res.data.card;
+	}, function errorCallback(res) {});
+	$scope.saveStatus = "未保存";
+	$scope.toggle = function(index) {
+		$scope.myVar[index] = !$scope.myVar[index];
+	};
+
+	$scope.myVar = [true, false, true];
+	$scope.show = function(value) {
+		$scope.myVar[0] = true;
+		$scope.myVar[1] = true;
+		$scope.myVar[2] = true;
+		$scope.myVar[value] = false;
+	}
+
+	$scope.delText = function(value) {
+		if(value == 0) {
+			$scope.card.topHtml = "";
+		} else if(value == 1) {
+			$scope.card.botHtml = "";
+		}
+	}
+
+	$scope.saveLotto = function() {
+		$http({
+			method: "POST",
+			url: "/lottery/",
+			data: {
+				path: $routeParams.cardName,
+				lottos: $scope.lottos,
+				lottoMark: $scope.lottoMark,
+				customers: []
+			},
+		}).then(function(res) {
+			$scope.lottoStatus = res.data.message;
+		}, function(res) {
+			$rootScope.error = res.data.message;
+			$location.path('/login');
+			return
+		});
+	}
+	$scope.lottos = [{name: "一等奖", value: "", percent:""},{name: "二等奖", value: "", percent:""},{name:"三等奖",value:"",percent:""}];
+	$scope.lottoMark = "请凭手机号到本店前台领取奖品，该奖品三日内有效";
+	$scope.addInfo = function(arr,index) {
+	//	console.log(index);
+		arr.splice(index, 0,{
+			name: "",
+			value: ""
+		});
+	};
+	$scope.pushInfo = function(arr) {
+		arr.push({
+			name: "",
+			value: ""
+		})
+	}
+	$scope.removeInfo = function(arr, index) {
+		arr.splice(index, 1);
+	};
+
+	$scope.trustUrl = function(url) {
+		return $sce.trustAsResourceUrl('http://image.mymicrocard.com/' + url);
+	};
+
+	$scope.saveCard = function() {
+		$scope.saveStatus = "保存中...";
+		if ($scope.lottos[0].value != ""){
+			$scope.saveLotto();
+		}
+		$http({
+			method: "PUT",
+			url: "/card/",
+			data: $scope.card,
+		}).then(function(res) {
+			$scope.saveStatus = "保存成功";
+			$timeout(function() {
+				$scope.saveStatus = "未保存";
+			}, 30000);
+		}, function(res) {
+			$rootScope.error = res.message;
+			$location.path('/login');
+			return
+		});
+	};
+
+	$scope.finishCard = function() {
+		$scope.saveCard();
+		var images = $("img");
+		var upImages = new Array();
+		var dom = "image.mymicrocard.com";
+		var dom2 = "image.mymicrocard.com/images";
+		for(var i = 0; i < images.length; i++) {
+			if(images[i].currentSrc.indexOf(dom) >= 0 && images[i].currentSrc.indexOf(dom2) < 0 && upImages.indexOf(images[i].currentSrc) === -1) {
+				upImages.push(images[i].currentSrc);
+			}
+		}
+		for(var i = 0; i < upImages.length; i++) {
+			upImages[i] = upImages[i].split('/').pop();
+		}
+		if (upImages.length > 0) {
 			$http({
 				method: "POST",
 				url: "/delete/files",
@@ -328,15 +331,30 @@ angular.module('myApp', [
 					upImages: upImages
 				}
 			}).then(function successCallback(res) {
-				console.log(res);
 			}, function errorCallback(res) {
 
 			});
+		}
 
+		if ($scope.card.redirect == "2") {
+			$http({
+				method: "POST",
+				url: "/finish2",
+				data: {
+					cardName: $routeParams.cardName,
+				}
+			}).then(function successCallback(res) {
+				$scope.finish = true;
+				var url = location.origin + "/uploads/" + $scope.card.cardPath + ".html";
+				$scope.cardHtml = url;
+			}).then(function errorCallback(res) {
+
+			});
+		} else {
 			var content = $("#main")[0].innerHTML;
 			$http({
 				method: "POST",
-				url: "/finish",
+				url: "/finish1",
 				data: {
 					cardName: $routeParams.cardName,
 					personName: $scope.card.personName.name,
@@ -350,59 +368,60 @@ angular.module('myApp', [
 
 			});
 		}
+	}
 
-	}])
+}])
 
-	.factory('Main', ['$http', '$rootScope', '$sessionStorage', function($http, $rootScope, $sessionStorage) {
-		var baseUrl = "";
-		return {
-			save: function(data, success, error) {
-				$http.post(baseUrl + '/signin', data).success(success).error(error)
-			},
-			login: function(data, success, error) {
-				$http.post(baseUrl + '/login', data).success(success).error(error);
-			},
-			getUser: function(success, error) {
-				$http.get(baseUrl + '/user').success(success).error(error);
-			},
-			card: function(data, success, error) {
-				$http.post(baseUrl + '/card/', data).success(success).error(error)
-			},
-			logout: function(success) {
-				$rootScope.user = null;
-				delete $sessionStorage.token;
-				success();
-			}
-		};
-	}])
+.factory('Main', ['$http', '$rootScope', '$sessionStorage', function($http, $rootScope, $sessionStorage) {
+	var baseUrl = "";
+	return {
+		save: function(data, success, error) {
+			$http.post(baseUrl + '/signin', data).success(success).error(error)
+		},
+		login: function(data, success, error) {
+			$http.post(baseUrl + '/login', data).success(success).error(error);
+		},
+		getUser: function(success, error) {
+			$http.get(baseUrl + '/user').success(success).error(error);
+		},
+		card: function(data, success, error) {
+			$http.post(baseUrl + '/card/', data).success(success).error(error)
+		},
+		logout: function(success) {
+			$rootScope.user = null;
+			delete $sessionStorage.token;
+			success();
+		}
+	};
+}])
 
-	.filter('to_trusted', ['$sce', function($sce) {
-		return function(text) {
-			return $sce.trustAsHtml(text);
-		};
-	}])
+.filter('to_trusted', ['$sce', function($sce) {
+	return function(text) {
+		return $sce.trustAsHtml(text);
+	};
+}])
 
-	.directive('contenteditable', function() {
-		return {
-			require: 'ngModel',
-			link: function(scope, element, attrs, ngModel) {
-				ngModel.$render = function() {
-					element.html(ngModel.$viewValue || '');
-				};
-				element.bind('keyup', function() {
-					scope.$apply(function() {
-						var html = element.html();
-						ngModel.$setViewValue(html);
-					});
-
+.directive('contenteditable', function() {
+	return {
+		require: 'ngModel',
+		link: function(scope, element, attrs, ngModel) {
+			ngModel.$render = function() {
+				element.html(ngModel.$viewValue || '');
+			};
+			element.bind('keyup', function() {
+				scope.$apply(function() {
+					var html = element.html();
+					ngModel.$setViewValue(html);
 				});
-				element.bind('click', function() {
-					scope.$apply(function() {
-						var html = element.html();
-						ngModel.$setViewValue(html);
-					});
 
+			});
+			element.bind('click', function() {
+				scope.$apply(function() {
+					var html = element.html();
+					ngModel.$setViewValue(html);
 				});
+
+			});
 				// 创建编辑器
 				var editor = new wangEditor(element);
 				editor.config.customUpload = true;

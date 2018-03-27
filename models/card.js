@@ -19,6 +19,7 @@ var CardSchema = mongoose.Schema({
 	topHtml: String,
 	botHtml: String,
 	other: Array,
+	redirect: String
 });
 
 var Card = mongoose.model('Card', CardSchema);

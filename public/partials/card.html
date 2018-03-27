@@ -79,6 +79,12 @@
 			<button class="fa fa-plus" ng-click="pushInfo(lottos)"></button><br /><br />
 			<label>备注: </label><input type="text" ng-model="lottoMark" style="width: 80%;"/><br/>
 			<button ng-click="saveLotto()">保存抽奖信息</button>&nbsp&nbsp{{lottoStatus}}
+			<br><br><br>
+			<div>
+				<label>是否关闭该网页:&nbsp&nbsp</label>
+				<input type="radio" ng-model="card.redirect" ng-value="1">否&nbsp;
+				<input type="radio" ng-model="card.redirect" ng-value="2">是&nbsp;
+			</div>
 
 		</div>
 

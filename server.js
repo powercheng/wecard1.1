@@ -428,8 +428,53 @@ app.post('/lottery', parseToken, function(req, res) {
 	});
 });
 
+app.post('/finish2', parseToken, function(req, res, next) {
+	jwt.verify(req.token, process.env.JWT_SECRET, function(err, decoded) {
+		if(err) {
+			res.status(400).json({
+				message: "错误token"
+			});
+		} else {
+			var owner = decoded.userId;
+			var cardName = req.body.cardName;
+			var out = "<html>" +
+				"<head>" +
+				"<meta http-equiv=\"refresh\" content=\"0, url=http://www.mymicrocard.com/uploads/" + owner + "/1.html\"" + 
+				"</head>" +
+				"<body>" +
+				"</body>" +
+				"</html>";
+			var path = "./public/uploads/" + owner + "/" + cardName + ".html";
+			var buffer = new Buffer(out);
+			if(fs.existsSync(path)) {
+				fs.unlinkSync(path);
+			}
+			fs.open(path, 'w+', function(err, fd) {
+				if(err) {
+					res.status(400).json({
+						data: "Error occured: " + err
+					});
+				} else {
+					fs.write(fd, buffer, 0, buffer.length, null, function(err) {
+						if(err) {
+							res.status(400).json({
+								data: "Error occured: " + err
+							});
+						} else {
+							fs.close(fd, function() {
+								res.status(200).json({
+									data: "创建成功"
+								});
+							});
+						}
+					});
+				}
+			});
+		}
+	});
+});
 
-app.post('/finish', parseToken, function(req, res, next) {
+app.post('/finish1', parseToken, function(req, res, next) {
 	jwt.verify(req.token, process.env.JWT_SECRET, function(err, decoded) {
 		if(err) {
 			res.status(400).json({
@@ -563,9 +608,7 @@ app.post('/delete/files', parseToken, function(req, res, next) {
 							if(parseInt(respInfo.statusCode / 100) == 2) {
 								respBody.forEach(function(item) {
 									if(item.code == 200) {
-										console.log(item.code + "\tsuccess");
 									} else {
-										console.log(item.code + "\t" + item.data.error);
 									}
 								});
 								res.status(200).json({
