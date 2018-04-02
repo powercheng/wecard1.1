@@ -483,7 +483,7 @@ app.post('/finish1', parseToken, function(req, res, next) {
 		} else {
 			var owner = decoded.userId;
 			var cardName = req.body.cardName;
-			var personName = req.body.personName;
+			var title = req.body.title;
 			var content = req.body.content;
 			var head = "<html>" +
 				"<head>" +
@@ -493,7 +493,7 @@ app.post('/finish1', parseToken, function(req, res, next) {
 				"<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\">" +
 				"<meta name=\"viewport\" content=\"width=device-width, minimum-scale=1, maximum-scale=1,user-scalable=no\">" +
 				"<meta name=\"format-detection\" content=\"telephone=no\">" +
-				"<title>" + personName + "的微名片</title>" +
+				"<title>" + title + "</title>" +
 				"<link href=\"/stylesheets/main.css\" rel=\"stylesheet\">" +
 				"</head>" +
 				"<body>" +

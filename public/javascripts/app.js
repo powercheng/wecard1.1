@@ -152,6 +152,7 @@ angular.module('myApp', [
 		card.topHtml = "";
 		card.botHtml = "";
 		card.music = "";
+		card.title = "";
 		Main.card(angular.toJson(card), function(res) {
 			$rootScope.user = res.user;
 			$rootScope.pages = new Array(Math.ceil(res.user.cards.length/15));
@@ -357,7 +358,7 @@ angular.module('myApp', [
 				url: "/finish1",
 				data: {
 					cardName: $routeParams.cardName,
-					personName: $scope.card.personName.name,
+					title: $scope.card.title,
 					content: content
 				}
 			}).then(function successCallback(res) {
