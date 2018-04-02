@@ -23,6 +23,7 @@
 		<div class="col-md-6  smallFont" ng-hide="myVar[1]">
 			<div>
 				<label>模板:&nbsp&nbsp</label>
+				<input type="radio" ng-model="card.template" ng-value="0">无&nbsp;
 				<input type="radio" ng-model="card.template" ng-value="1">1&nbsp;
 				<input type="radio" ng-model="card.template" ng-value="2">2&nbsp;
 			</div>
@@ -78,6 +79,11 @@
 			</div>
 			<button class="fa fa-plus" ng-click="pushInfo(lottos)"></button><br /><br />
 			<label>备注: </label><input type="text" ng-model="lottoMark" style="width: 80%;"/><br/>
+			<br>
+			<p>为客户开通账户密码，方便客户以后直接查询中奖用户信息</p>
+			<label style="width: 9%">账号:</label><input type="text" ng-model="" style="width: 15%">
+			<label style="width: 9%">密码:</label><input type="password" ng-model="password" style="width: 15%">
+			<br>
 			<button ng-click="saveLotto()">保存抽奖信息</button>&nbsp&nbsp{{lottoStatus}}
 			<br><br><br>
 			<div>
@@ -98,7 +104,7 @@
 				<div ng-bind-html="card.topHtml | to_trusted"></div>
 				<div ng-include="'/partials/' + card.template + '.html'"></div>
 				<div ng-bind-html="card.botHtml | to_trusted"></div>
-				<div ng-include="'/partials/bot.html'"></div>
+				<div ng-if="card.template == 1" ng-include="'/partials/bot.html'"></div>
 			</div>
 		</div>
 

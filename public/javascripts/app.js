@@ -112,35 +112,35 @@ angular.module('myApp', [
 		}
 		card.template = "1";
 		card.companyName = {
-			name: '云梦敏捷图文广告',
+			name: '',
 		};
 		card.companyAddress = {
-			name: '云梦县鑫光公寓西北100米(梦泽大道西)',
-			value: '31.031310,113.745570'
+			name: '',
+			value: ''
 		};
 		card.companyPhone = {
-			name: "0712-4222110"
+			name: ""
 		};
 		card.personName = {
-			name: '黄敏'
+			name: ''
 		};
 		card.personTitle = {
-			name: '总经理'
+			name: ''
 		};
 		card.personPhone = {
-			name: "15272838562"
+			name: ""
 		};
 		card.personImage = {
-			name: "头像",
-			value: "images/personImage.jpg"
+			name: "",
+			value: ""
 		};
 		card.wechat = {
-			name: "15272838562",
-			code: "images/wechat.jpg"
+			name: "",
+			code: ""
 		};
 		card.QQ = {
-			name: "3367876415",
-			code: "images/QQ.jpg"
+			name: "",
+			code: ""
 		};
 		card.other = [{
 			name: "",
