@@ -9,7 +9,7 @@ body {
 
 .main {
 	position: relative;
-	width: 414px
+	width: 100%;
 	margin: 0px auto;
 	padding: 6px 6px 60px 6px;
 	border: none;
